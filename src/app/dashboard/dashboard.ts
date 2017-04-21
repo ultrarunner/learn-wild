@@ -1,6 +1,7 @@
 import { Component, ViewChild, AfterViewInit } from '@angular/core';
-import { DashboardComponentRss } from "./dashboard-component-rss";
+import { DashboardComponentRss } from './dashboard-component-rss';
 import { AngularMasonry, MasonryOptions } from 'angular2-masonry';
+import { FeedEnclosure } from '../model/feed-enclosure';
 
 @Component({
     selector: 'dashboard',
@@ -11,7 +12,7 @@ import { AngularMasonry, MasonryOptions } from 'angular2-masonry';
                 [title]="info.title" 
                 [end_point]="info.end_point"
                 [count]="info.count"
-                (selected)="select($event)">
+                (componentSelected)="selectComponent($event)">
             </dashboard-component-outlet>
         </masonry>
         <div *ngIf="selectedComponent" class="col-sm-12">
@@ -20,8 +21,10 @@ import { AngularMasonry, MasonryOptions } from 'angular2-masonry';
     `
 })
 
-export class Dashboard implements AfterViewInit{
+export class Dashboard implements AfterViewInit {
     @ViewChild(AngularMasonry) masonry: AngularMasonry;
+
+    selectedComponent: Dashboard;
 
     options: MasonryOptions = {
         transitionDuration: '0.35',
@@ -30,34 +33,28 @@ export class Dashboard implements AfterViewInit{
         percentPosition: true
     };
 
-    ngAfterViewInit() {
-        this.masonry.layoutComplete.subscribe(() => {
-            console.log('masonry layout complete.');
-        });
-    }
-
     private componentInfos = [
         {
             type: DashboardComponentRss,
-            title: '1st Component - Freakonomics',
+            title: 'Freakonomics',
             end_point: 'http://feeds2.feedburner.com/freakonomicsradio',
             count: 6
         },
         {
             type: DashboardComponentRss,
-            title: '2nd Component - Channel 9',
+            title: 'Channel 9',
             end_point: 'https://channel9.msdn.com/all/rss',
             count: 8
         },
         {
             type: DashboardComponentRss,
-            title: '3rd Component - Ted Talks',
+            title: 'Ted Talks',
             end_point: 'https://www.ted.com/talks/rss',
             count: 10
         },
         {
             type: DashboardComponentRss,
-            title: '4th Component - Adventures in Angular',
+            title: 'Adventures in Angular',
             end_point: 'https://feeds.feedwrench.com/AdventuresInAngular.rss',
             count: 10
         },
@@ -67,12 +64,16 @@ export class Dashboard implements AfterViewInit{
             end_point: 'http://feeds.hanselman.com/scotthanselman',
             count: 4
         }
-        
     ];
 
-    selectedComponent: Dashboard;
+    ngAfterViewInit() {
+        this.masonry.layoutComplete.subscribe(() => {
+            //console.log('masonry layout complete.');
+        });
+    }
 
-    select(selected) {
+    selectComponent(selected: any) {
+        //console.log('Component Selection Event received by Dashboard: ' + selected.end_point);
         this.selectedComponent = selected;
     }
 }

@@ -15,11 +15,18 @@ import { AppComponent } from './app.component';
 
 // import { FeedCardComponent } from './feed-card/feed-card.component';
 import { FeedService } from './feed.service';
-import { DialogService} from './shared/simple-dialog/dialog.service';
+import { DialogService } from './shared/simple-dialog/dialog.service';
+import { NgRadio } from './shared/events.service';
 
 // shared
 import { StripHtmlTagsPipe } from './pipe/strip-html-tags.pipe';
 import { SimpleDialogComponent } from './shared/simple-dialog/simple-dialog.component';
+
+import { VgCoreModule } from 'videogular2/core';
+import { VgControlsModule } from 'videogular2/controls';
+import { VgOverlayPlayModule } from 'videogular2/overlay-play';
+import { VgBufferingModule } from 'videogular2/buffering';
+import { SingleMediaPlayerComponent } from './shared/single-media-player/single-media-player.component';
 
 @NgModule({
 
@@ -30,7 +37,8 @@ import { SimpleDialogComponent } from './shared/simple-dialog/simple-dialog.comp
     DashboardComponentRss,
     //FeedCardComponent,
     StripHtmlTagsPipe,
-    SimpleDialogComponent
+    SimpleDialogComponent,
+    SingleMediaPlayerComponent
   ],
 
   imports: [
@@ -41,21 +49,30 @@ import { SimpleDialogComponent } from './shared/simple-dialog/simple-dialog.comp
 
     MaterialModule.forRoot(),
     BrowserAnimationsModule,
-    FlexLayoutModule
+    FlexLayoutModule,
+
+    VgCoreModule,
+    VgControlsModule,
+    VgOverlayPlayModule,
+    VgBufferingModule
   ],
 
   providers: [
     FeedService,
-    DialogService
+    DialogService,
+    NgRadio
   ],
 
   bootstrap: [
     AppComponent
+    // don't do this:
+    // http://stackoverflow.com/questions/38787795/why-ngoninit-called-twice
+    // SingleMediaPlayerComponent
   ],
 
   entryComponents: [
-      DashboardComponentRss,
-      SimpleDialogComponent
+    DashboardComponentRss,
+    SimpleDialogComponent
   ]
 })
 export class AppModule { }

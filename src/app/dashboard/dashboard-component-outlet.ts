@@ -5,21 +5,24 @@ import {
     Input,
     Output,
     EventEmitter,
-    OnChanges
+    OnChanges,
+    OnInit
 } from '@angular/core';
 
 import { DashboardComponent } from './dashboard-component';
+import { FeedEnclosure } from '../model/feed-enclosure';
 
 @Component({
     selector: 'dashboard-component-outlet',
     template: ''
 })
-export class DashboardComponentOutlet implements DashboardComponent, OnChanges {
+
+export class DashboardComponentOutlet implements DashboardComponent, OnChanges, OnInit {
 
     @Input() title: string;
     @Input() end_point: string;
     @Input() count: number;
-    @Output() selected = new EventEmitter();
+    @Output() componentSelected = new EventEmitter();
     @Input() type;
 
     private dynamicInstance: DashboardComponent;
@@ -28,18 +31,21 @@ export class DashboardComponentOutlet implements DashboardComponent, OnChanges {
         private componentFactoryResolver: ComponentFactoryResolver) {
     }
 
+    ngOnInit() {
+    }
+
     ngOnChanges(changes) {
 
         if (changes.type) {
             this.viewContainer.clear();
 
             // Create Component
-            let factory = this.componentFactoryResolver.resolveComponentFactory(this.type);
-            let componentRef = this.viewContainer.createComponent(factory);
+            const factory = this.componentFactoryResolver.resolveComponentFactory(this.type);
+            const componentRef = this.viewContainer.createComponent(factory);
             this.dynamicInstance = componentRef.instance as DashboardComponent;
 
             // Set up Event-Handlers and delegate to own handlers
-            this.dynamicInstance.selected.subscribe(e => this.selected.emit(e));
+            this.dynamicInstance.componentSelected.subscribe(e => this.componentSelected.emit(e));
         }
 
         // Delegate Properties
