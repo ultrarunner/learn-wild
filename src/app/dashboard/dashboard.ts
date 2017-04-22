@@ -1,7 +1,7 @@
 import { Component, ViewChild, AfterViewInit } from '@angular/core';
-import { DashboardComponentRss } from './dashboard-component-rss';
+import { RssComponent } from './cards/rss-component';
 import { AngularMasonry, MasonryOptions } from 'angular2-masonry';
-import { FeedEnclosure } from '../model/feed-enclosure';
+import { FeedEnclosure } from '../model/feed';
 
 @Component({
     selector: 'dashboard',
@@ -35,31 +35,31 @@ export class Dashboard implements AfterViewInit {
 
     private componentInfos = [
         {
-            type: DashboardComponentRss,
+            type: RssComponent,
             title: 'Freakonomics',
             end_point: 'http://feeds2.feedburner.com/freakonomicsradio',
             count: 6
         },
         {
-            type: DashboardComponentRss,
+            type: RssComponent,
             title: 'Channel 9',
             end_point: 'https://channel9.msdn.com/all/rss',
             count: 8
         },
         {
-            type: DashboardComponentRss,
+            type: RssComponent,
             title: 'Ted Talks',
             end_point: 'https://www.ted.com/talks/rss',
             count: 10
         },
         {
-            type: DashboardComponentRss,
+            type: RssComponent,
             title: 'Adventures in Angular',
             end_point: 'https://feeds.feedwrench.com/AdventuresInAngular.rss',
             count: 10
         },
         {
-            type: DashboardComponentRss,
+            type: RssComponent,
             title: 'Scott Hanselman\'s blog',
             end_point: 'http://feeds.hanselman.com/scotthanselman',
             count: 4

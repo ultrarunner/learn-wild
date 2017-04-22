@@ -1,5 +1,4 @@
 import { EventEmitter } from '@angular/core';
-import { FeedEnclosure } from '../model/feed-enclosure';
 
 export interface DashboardComponent {
     title: string;

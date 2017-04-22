@@ -8,13 +8,13 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { MasonryModule } from 'angular2-masonry';
 
 import { Dashboard } from './dashboard/dashboard';
-import { DashboardComponentRss } from './dashboard/dashboard-component-rss';
+import { RssComponent } from './dashboard/cards/rss-component';
 import { DashboardComponentOutlet } from './dashboard/dashboard-component-outlet';
 
 import { AppComponent } from './app.component';
 
 // import { FeedCardComponent } from './feed-card/feed-card.component';
-import { FeedService } from './feed.service';
+import { RssService } from './dashboard/cards/rss.service';
 import { DialogService } from './shared/simple-dialog/dialog.service';
 import { NgRadio } from './shared/events.service';
 
@@ -34,8 +34,7 @@ import { SingleMediaPlayerComponent } from './shared/single-media-player/single-
     AppComponent,
     Dashboard,
     DashboardComponentOutlet,
-    DashboardComponentRss,
-    //FeedCardComponent,
+    RssComponent,
     StripHtmlTagsPipe,
     SimpleDialogComponent,
     SingleMediaPlayerComponent
@@ -58,7 +57,7 @@ import { SingleMediaPlayerComponent } from './shared/single-media-player/single-
   ],
 
   providers: [
-    FeedService,
+    RssService,
     DialogService,
     NgRadio
   ],
@@ -71,7 +70,7 @@ import { SingleMediaPlayerComponent } from './shared/single-media-player/single-
   ],
 
   entryComponents: [
-    DashboardComponentRss,
+    RssComponent,
     SimpleDialogComponent
   ]
 })

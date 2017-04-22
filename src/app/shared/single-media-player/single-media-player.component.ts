@@ -1,5 +1,5 @@
 import { Component, OnInit, EventEmitter, Output, AfterViewInit } from '@angular/core';
-import { FeedEnclosure } from '../../model/feed-enclosure';
+import { FeedEnclosure } from '../../model/feed';
 import { NgRadio } from '../../shared/events.service';
 import { VgAPI } from 'videogular2/core';
 
@@ -16,7 +16,6 @@ export class SingleMediaPlayerComponent implements OnInit {
 
   selectedMedia: FeedEnclosure;
   api: VgAPI;
-  //radio = new NgRadio();
 
   constructor(private radio: NgRadio) {
     console.log('Media Player Initialized...');
