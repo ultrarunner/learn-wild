@@ -1,7 +1,10 @@
 import { Component, ViewChild, AfterViewInit } from '@angular/core';
-import { RssComponent } from './cards/rss-component';
 import { AngularMasonry, MasonryOptions } from 'angular2-masonry';
+
+import { RssComponent } from './cards/rss/rss-component';
 import { FeedEnclosure } from '../model/feed';
+
+import { NytComponent } from './cards/nyt/nyt.component';
 
 @Component({
     selector: 'dashboard',
@@ -12,6 +15,7 @@ import { FeedEnclosure } from '../model/feed';
                 [title]="info.title" 
                 [end_point]="info.end_point"
                 [count]="info.count"
+                [options]="info.options"
                 (componentSelected)="selectComponent($event)">
             </dashboard-component-outlet>
         </masonry>
@@ -40,6 +44,20 @@ export class Dashboard implements AfterViewInit {
             end_point: 'http://feeds2.feedburner.com/freakonomicsradio',
             count: 6
         },
+        {
+            type: NytComponent,
+            title: 'NYT - Top Stories',
+            end_point: '',
+            options: 'world',
+            count: 5
+        }, 
+        {
+            type: NytComponent,
+            title: 'NYT - Top Stories',
+            end_point: '',
+            options: 'technology',
+            count: 7
+        },                       
         {
             type: RssComponent,
             title: 'Channel 9',

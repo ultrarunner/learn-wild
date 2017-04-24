@@ -19,11 +19,13 @@ import { FeedEnclosure } from '../model/feed';
 
 export class DashboardComponentOutlet implements DashboardComponent, OnChanges, OnInit {
 
+    @Input() type;
     @Input() title: string;
     @Input() end_point: string;
     @Input() count: number;
+    @Input() options: string;
+
     @Output() componentSelected = new EventEmitter();
-    @Input() type;
 
     private dynamicInstance: DashboardComponent;
 
@@ -53,6 +55,7 @@ export class DashboardComponentOutlet implements DashboardComponent, OnChanges, 
             this.dynamicInstance.title = this.title;
             this.dynamicInstance.end_point = this.end_point;
             this.dynamicInstance.count = this.count;
+            this.dynamicInstance.options = this.options;
         }
     }
 }
