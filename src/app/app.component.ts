@@ -9,7 +9,7 @@ import { Component } from '@angular/core';
                     <img 
                     src="/assets/borntolearnwild.png" 
                     style="margin-right: 10px; width:30px; height: 30px;" 
-                    alt="Learn Wild | Not every site can become a great source of knowledge; but a great source of knowledge *can* come from any site.">
+                    alt="Learn Wild | Not every site can become a great source of knowledge; but a great source of knowledge can come from any site.">
                 </a>                
             </span>
             <span class="example-spacer"></span>
