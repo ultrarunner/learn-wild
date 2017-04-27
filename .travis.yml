@@ -13,6 +13,8 @@ before_script:
 
 script:
   - ng build
+  - git add *
+  - git commit "Travis CI build."
 
 deploy:  
   provider: azure_web_apps
