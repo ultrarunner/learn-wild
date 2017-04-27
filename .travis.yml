@@ -13,11 +13,14 @@ before_script:
 
 script:
   - ng build
+  - git add .
+  - git commit -m "Travis CI"
+  - git push origin master
 
 deploy:  
   provider: azure_web_apps
   skip_cleanup: false
-
+  
 after_success:
 #  - firebase deploy --token $FIREBASE_TOKEN
 
