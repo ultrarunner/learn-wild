@@ -12,11 +12,11 @@ before_script:
   - npm install -g @angular/cli
 
 script:
-  - ng build --prod
+  - ng build
 
 deploy:  
   provider: azure_web_apps
-  skip_cleanup: true
+  skip_cleanup: false
 
 after_success:
 #  - firebase deploy --token $FIREBASE_TOKEN
