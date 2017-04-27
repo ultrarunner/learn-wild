@@ -81,6 +81,12 @@ export class Dashboard implements AfterViewInit {
             title: 'Scott Hanselman\'s blog',
             end_point: 'http://feeds.hanselman.com/scotthanselman',
             count: 4
+        },
+        {
+            type: RssComponent,
+            title: 'The Minimalists',
+            end_point: 'http://theminimalists.libsyn.com/rss',
+            count: 5
         }
     ];
 
