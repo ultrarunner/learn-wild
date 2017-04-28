@@ -15,7 +15,7 @@ before_script:
 
 script:
   - ng build
-  - git remote https://$GH_TOKEN@github.com/ultrarunner/learn-wild.git/  
+  - git remote add origin https://$GH_TOKEN@github.com/ultrarunner/learn-wild.git/  
   - git add .
   - git commit -m "Travis CI build."
   - git push origin master
