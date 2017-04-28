@@ -11,6 +11,7 @@ branches:
 before_script:
   - git config --global user.email "jerome.jourdon@gmail.com"
   - git config --global user.name "ultrarunner"
+  - npm install travis-encrypt -g
   - npm install -g @angular/cli
 
 script:
@@ -30,6 +31,10 @@ deploy:
   
 after_success:
 #  - firebase deploy --token $FIREBASE_TOKEN
+
+env:
+  global:
+    -secure: "CbvwcSz2i5e0JFknjwhqFE0QEsIdj9Vzk3Hme7zVuOjcW8h5oUBayd4i7i+S/0yWdMJ/ia2bmTC8qPpRtfozTKL1bUlBVUxiYrqEHoA92S9tT+1ArCRPVR/pi35dKcwxCuXLwlOBXZjtzSO0RliIgpt53FmVdewcsBZ1qo4JJrrQZWu3h11AshlmgMCm7GtCSpAwdPKuCMBj7llh2iZ3C/t9Wfl53ydUhXpkwSO3eaIr81l3lzHzoTCeyQuSaGT/a4aYR/cZOAcfLnraRBFxh/jM2G2tZT0bDCiliJG31DCylWMoCXOc6ExI8IxI7yXhIgArGnPBxdXOJbt8R52y+LWN+25xdYrTVXHbtTEI9WXwrrQpGPgKEhOCTbQM01DwClq095MdSx/B4WK+LfA97gz9dUlAzVihE/GLxRk5HINR7LrQkL267YLqhYOQlN4yeaoGZM4IDEoFgPG15sikTpuiGhw9nN0u7WqUkcLTvHVXbBp1Ai7oh52woCrNFJn6PR71ZytBGgPf+qEvoiAujr7MWYwJVJrJPT/I9u7z4sFjuw8QT5yx6jYOvkM5aw2Gk6LMW64d/VWCwMlXcptMJbRseLM129YIThbWaGum4xCQsWbsOGH9c4q50RHr57nyk8K7hXDdIZxZ6Wow7QyjSfGJyXTlBv6ZzfiDOheN0lg="
 
 notifications:
   email:
