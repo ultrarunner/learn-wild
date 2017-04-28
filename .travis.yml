@@ -13,13 +13,16 @@ before_script:
 
 script:
   - ng build
+  - git add .
+  - git commit -m "Travis CI build."
+  - git push origin master
 
 deploy:  
   provider: azure_web_apps
   site: learnwild
   skip_cleanup: false
   verbose: true
-  #file: "dist/"
+  file: "dist/"
   on:
     branch: master
   
