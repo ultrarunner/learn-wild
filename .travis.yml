@@ -9,6 +9,8 @@ branches:
     - master
 
 before_script:
+  - git config --global user.email "jerome.jourdon@gmail.com"
+  - git config --global user.name "ultrarunner"
   - npm install -g @angular/cli
 
 script:
