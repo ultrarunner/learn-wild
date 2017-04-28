@@ -19,7 +19,7 @@ deploy:
   site: learnwild
   skip_cleanup: false
   verbose: true
-  file: "dist/"
+  #file: "dist/"
   on:
     branch: master
   
