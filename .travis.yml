@@ -16,8 +16,10 @@ script:
 
 deploy:  
   provider: azure_web_apps
-  skip_cleanup: true
+  site: learnwild
+  skip_cleanup: false
   verbose: true
+  file: "dist/"
   on:
     branch: master
   
