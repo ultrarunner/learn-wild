@@ -15,7 +15,7 @@ before_script:
   - npm install -g @angular/cli
 
 script:
-  - ng build --prod
+  - ng build
   #- git remote add origin https://$GH_TOKEN@github.com/ultrarunner/learn-wild.git/  
   #- git add .
   #- git commit -m "Travis CI build."
