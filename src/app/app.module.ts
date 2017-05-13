@@ -5,7 +5,6 @@ import { HttpModule } from '@angular/http';
 import { DatePipe } from '@angular/common';
 import { MaterialModule } from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-//import { FlexLayoutModule } from '@angular/flex-layout';
 
 import { MasonryModule } from 'angular2-masonry';
 
@@ -46,7 +45,7 @@ import { UpperCaseFirstLetterPipe } from './pipe/upper-case-first-letter.pipe';
     RssComponent,
     NytComponent,
 
-    UpperCaseFirstLetterPipe,    
+    UpperCaseFirstLetterPipe,
     StripHtmlTagsPipe,
 
     SimpleDialogComponent,
@@ -59,9 +58,8 @@ import { UpperCaseFirstLetterPipe } from './pipe/upper-case-first-letter.pipe';
     HttpModule,
     MasonryModule,
 
-    MaterialModule.forRoot(),
     BrowserAnimationsModule,
-    //FlexLayoutModule,
+    MaterialModule,
 
     VgCoreModule,
     VgControlsModule,
