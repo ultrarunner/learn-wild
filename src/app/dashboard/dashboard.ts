@@ -78,6 +78,12 @@ export class Dashboard implements AfterViewInit {
         },
         {
             type: RssComponent,
+            title: 'Javascript Jabber',
+            end_point: 'https://feeds.feedwrench.com/JavascriptJabber.rss',
+            count: 5
+        },        
+        {
+            type: RssComponent,
             title: 'Scott Hanselman\'s blog',
             end_point: 'http://feeds.hanselman.com/scotthanselman',
             count: 4
@@ -87,7 +93,13 @@ export class Dashboard implements AfterViewInit {
             title: 'The Minimalists',
             end_point: 'http://theminimalists.libsyn.com/rss',
             count: 5
-        }
+        },
+        {
+            type: RssComponent,
+            title: 'Hanselminutes',
+            end_point: 'http://feeds.podtrac.com/9dPm65vdpLL1',
+            count: 3
+        }                
     ];
 
     ngAfterViewInit() {

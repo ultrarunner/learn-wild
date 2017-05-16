@@ -79,7 +79,7 @@ export class RssComponent implements DashboardComponent {
 
   openDialog(feedEntry: FeedEntry) {
     // console.log(feedEntry);
-    const title = feedEntry.title + '| ' + feedEntry.pubDate;
+    const title = feedEntry.title + ' | ' + feedEntry.pubDate;
     this.dialogService.confirm(title, feedEntry.description);
   }
 
