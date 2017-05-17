@@ -21,7 +21,7 @@ import { DialogService } from '../../../shared/simple-dialog/dialog.service';
         <md-card-content *ngIf="results.length">
           <md-list-item *ngFor="let item of results">         
             <button md-icon-button (click)="openDialog(item)">
-              <md-icon>info</md-icon>
+              <md-icon [style.color]="item.published_date | todayPipe">info</md-icon>
             </button>
           <button md-icon-button (click)='onOpenLink(item)' mdTooltip="Open Article in New Window" mdTooltipPosition="above">
             <md-icon>open_in_new</md-icon>
@@ -77,7 +77,7 @@ export class NytComponent implements DashboardComponent {
 
   openDialog(result: Result) {
     // console.log(feedEntry);
-    const title = result.title + '| ' + new DatePipe('en-US').transform(result.published_date, 'yyyy-MM-dd');
+    const title = result.title + ' | ' + new DatePipe('en-US').transform(result.published_date, 'yyyy-MM-dd');
     this.dialogService.confirm(title, result.abstract);
   }
 

@@ -35,6 +35,7 @@ import { VgOverlayPlayModule } from 'videogular2/overlay-play';
 import { VgBufferingModule } from 'videogular2/buffering';
 import { SingleMediaPlayerComponent } from './shared/single-media-player/single-media-player.component';
 import { UpperCaseFirstLetterPipe } from './pipe/upper-case-first-letter.pipe';
+import { TodayPipe } from './pipe/today.pipe';
 
 @NgModule({
 
@@ -47,6 +48,7 @@ import { UpperCaseFirstLetterPipe } from './pipe/upper-case-first-letter.pipe';
 
     UpperCaseFirstLetterPipe,
     StripHtmlTagsPipe,
+    TodayPipe,
 
     SimpleDialogComponent,
     SingleMediaPlayerComponent

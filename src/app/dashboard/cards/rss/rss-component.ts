@@ -5,6 +5,8 @@ import { FeedInfo, FeedEntry, FeedEnclosure } from '../../../model/feed';
 
 import { DialogService } from '../../../shared/simple-dialog/dialog.service';
 import { NgRadio } from '../../../shared/events.service';
+import { TodayPipe } from '../../../pipe/today.pipe';
+
 
 @Component({
   selector: 'app-component-rss',
@@ -22,12 +24,12 @@ import { NgRadio } from '../../../shared/events.service';
         <md-card-content *ngIf="items.length">
           <md-list-item *ngFor="let item of items">         
             <button md-icon-button (click)="openDialog(item)" mdTooltip="View Summary">
-              <md-icon>info</md-icon>
+              <md-icon [style.color]="item.pubDate | todayPipe">info</md-icon>
             </button>
             <button mdTooltip="Play Audio" md-icon-button *ngIf="item.enclosure.type != null" (click)="onSelectMedia(item.enclosure)">
               <md-icon>play_circle_filled</md-icon>
             </button>            
-            {{item.title}}             
+            {{item.title}}            
           </md-list-item>
         </md-card-content>
         <md-card-actions style="text-align: right;">
@@ -46,6 +48,7 @@ export class RssComponent implements DashboardComponent {
 
   private feed: any = {};
   private items: any = [];
+  private today : Date = new Date();
 
   @Input() title: string;
   @Input() end_point: string;
