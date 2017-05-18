@@ -17,7 +17,7 @@ import { Component } from '@angular/core';
             <md-icon class="example-icon" style="color: white;">account_circle</md-icon>
             <md-icon class="example-icon" style="color: white;">delete</md-icon>
         </md-toolbar>
-        <div style="margin-top:5px;">   
+        <div style="margin-top:5px;">
             <dashboard></dashboard>
         </div>        
     `

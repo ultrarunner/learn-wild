@@ -26,6 +26,9 @@ import { TodayPipe } from '../../../pipe/today.pipe';
             <button md-icon-button (click)="openDialog(item)" mdTooltip="View Summary">
               <md-icon [style.color]="item.pubDate | todayPipe">info</md-icon>
             </button>
+            <button md-icon-button (click)='onOpenItemLink(item)' mdTooltip="Open in New Window" mdTooltipPosition="above">
+              <md-icon>open_in_new</md-icon>
+            </button>            
             <button mdTooltip="Play Audio" md-icon-button *ngIf="item.enclosure.type != null" (click)="onSelectMedia(item.enclosure)">
               <md-icon>play_circle_filled</md-icon>
             </button>            
@@ -33,7 +36,7 @@ import { TodayPipe } from '../../../pipe/today.pipe';
           </md-list-item>
         </md-card-content>
         <md-card-actions style="text-align: right;">
-          <button md-mini-fab (click)='onOpenLink()' mdTooltip="Open in New Window" mdTooltipPosition="above">
+          <button md-mini-fab (click)='onOpenFeedLink()' mdTooltip="Open in New Window" mdTooltipPosition="above">
             <md-icon>open_in_new</md-icon>
           </button>
           <button md-mini-fab (click)='onPullData()' mdTooltip="Refresh" mdTooltipPosition="above">
@@ -99,7 +102,11 @@ export class RssComponent implements DashboardComponent {
     this.componentSelected.emit(this);
   }
 
-  onOpenLink() {
+  onOpenItemLink(item: FeedEntry) {
+    window.open(item.link, '_blank');
+  }
+
+  onOpenFeedLink() {
     window.open(this.feed.link, '_blank');
   }
 }

@@ -105,6 +105,12 @@ export class Dashboard implements AfterViewInit {
             title: 'This American Life',
             end_point: 'http://feed.thisamericanlife.org/talpodcast',
             count: 2                        
+        },
+        ,{
+            type: RssComponent,
+            title: 'Simple Talk',
+            end_point: 'https://www.simple-talk.com/feed/',
+            count: 5
         }
     ];
 
