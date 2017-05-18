@@ -14,8 +14,8 @@ import { Component } from '@angular/core';
             </span>
             <span class="example-spacer"></span>
             <span style="width: 100%"><app-single-media-player></app-single-media-player></span>            
-            <md-icon class="example-icon" style="color: white;">account_circle</md-icon>
-            <md-icon class="example-icon" style="color: white;">delete</md-icon>
+            <!--<md-icon class="example-icon" style="color: white;">account_circle</md-icon>
+            <md-icon class="example-icon" style="color: white;">delete</md-icon>-->
         </md-toolbar>
         <div style="margin-top:5px;">
             <dashboard></dashboard>

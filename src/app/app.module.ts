@@ -58,13 +58,13 @@ import { TodayPipe } from './pipe/today.pipe';
   imports: [
     BrowserModule,
     FormsModule,
-    RouterModule.forRoot([
-      {
-        path: '',
-        redirectTo: '/home',
-        pathMatch: 'full'
-      }
-    ]),
+    // RouterModule.forRoot([
+    //   {
+    //     path: '',
+    //     redirectTo: '/home',
+    //     pathMatch: 'full'
+    //   }
+    // ]),
     HttpModule,
     MasonryModule,
 

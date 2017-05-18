@@ -19,11 +19,11 @@ import { NytComponent } from './cards/nyt/nyt.component';
                 (componentSelected)="selectComponent($event)">
             </dashboard-component-outlet>
         </masonry>
-        <div *ngIf="selectedComponent" class="col-sm-12">
-            <b>Selected: </b> {{ selectedComponent.title }} | {{ selectedComponent.end_point }} | {{ selectedComponent.count }}
-        </div>
     `
 })
+    // <div *ngIf="selectedComponent" class="col-sm-12">
+    //     <b>Selected: </b> {{ selectedComponent.title }} | {{ selectedComponent.end_point }} | {{ selectedComponent.count }}
+    // </div>
 
 export class Dashboard implements AfterViewInit {
     @ViewChild(AngularMasonry) masonry: AngularMasonry;
@@ -105,11 +105,17 @@ export class Dashboard implements AfterViewInit {
             title: 'This American Life',
             end_point: 'http://feed.thisamericanlife.org/talpodcast',
             count: 2                        
-        },
+        }
         ,{
             type: RssComponent,
             title: 'Simple Talk',
             end_point: 'https://www.simple-talk.com/feed/',
+            count: 5
+        }
+        ,{
+            type: RssComponent,
+            title: 'NPR - Planet Money Podcast',
+            end_point: 'https://www.npr.org/rss/podcast.php?id=510289',
             count: 5
         }
     ];
@@ -121,7 +127,7 @@ export class Dashboard implements AfterViewInit {
     }
 
     selectComponent(selected: any) {
-        //console.log('Component Selection Event received by Dashboard: ' + selected.end_point);
         this.selectedComponent = selected;
+        console.log('Component Selection Event received by Dashboard: ' + selected.title + ' | ' + selected.end_point + ' | ' + selected.count);        
     }
 }

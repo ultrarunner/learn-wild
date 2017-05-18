@@ -11,7 +11,7 @@ import { TodayPipe } from '../../../pipe/today.pipe';
 @Component({
   selector: 'app-component-rss',
   template: `
-      <md-card masonry-brick style="min-width: 280px; max-width: 320px; margin: 5px;" (click)="onSelected()">
+      <md-card masonry-brick style="min-width: 280px; max-width: 412px; margin: 5px;" (click)="onSelected()">
         <md-card-header *ngIf="items.length">
           <div md-card-avatar *ngIf="feed.image!=''"><img src="{{feed.image}}" style="width: 30px;"/></div>
           <md-card-title>{{feed.title}} <font color="red">|</font> {{feed.author}}</md-card-title>
@@ -75,7 +75,7 @@ export class RssComponent implements DashboardComponent {
       .delay(1000)
       .subscribe(
       result => {
-        // console.log(result.items);
+        //console.log(result.items);
         this.feed = result.feed,
           this.items = result.items.filter((item, index) => { return index < this.count; });
       },

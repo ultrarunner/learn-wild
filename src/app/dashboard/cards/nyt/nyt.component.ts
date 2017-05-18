@@ -10,7 +10,7 @@ import { DialogService } from '../../../shared/simple-dialog/dialog.service';
 @Component({
   selector: 'app-component-nyt',
   template: `
-      <md-card masonry-brick style="min-width: 280px; max-width: 320px; margin: 5px;" (click)="onSelected()">
+      <md-card masonry-brick style="min-width: 280px; max-width: 412px; margin: 5px;" (click)="onSelected()">
         <md-card-header *ngIf="results.length">
           <md-card-title>{{title}} <font color='red'>|</font> {{ options | upperCaseFirstLetter }}</md-card-title>
         </md-card-header>
