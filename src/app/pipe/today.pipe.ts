@@ -13,7 +13,7 @@ export class TodayPipe implements PipeTransform {
     var today = new Date();
     var dateValue = new Date(value);
     var color: string = this.defaultColor;
-    console.log("today: " + today.getDate() + " " + today.getMonth() + " " + today.getFullYear());
+    //console.log("today: " + today.getDate() + " " + today.getMonth() + " " + today.getFullYear());
 
     if (
       today.getDate() === dateValue.getDate() 

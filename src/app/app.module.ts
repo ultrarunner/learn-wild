@@ -3,12 +3,14 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { DatePipe } from '@angular/common';
-import { RouterModule } from '@angular/router';
+import { RouterModule, Routes } from '@angular/router';
 import { MaterialModule } from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { AngularFireModule } from 'angularfire2';
+import { AngularFireDatabaseModule } from 'angularfire2/database';
+import { AngularFireAuthModule, AngularFireAuth } from 'angularfire2/auth';
 
 import { MasonryModule } from 'angular2-masonry';
-
 import { AppComponent } from './app.component';
 
 // dashboard
@@ -19,15 +21,21 @@ import { DashboardComponentOutlet } from './dashboard/dashboard-component-outlet
 import { RssComponent } from './dashboard/cards/rss/rss-component';
 import { RssService } from './dashboard/cards/rss/rss.service';
 
+// card services
 import { NytComponent } from './dashboard/cards/nyt/nyt.component';
 import { NytService } from './dashboard/cards/nyt/nyt.service';
 
 // shared services
+import { AuthService } from './shared/auth.service';
 import { DialogService } from './shared/simple-dialog/dialog.service';
 import { NgRadio } from './shared/events.service';
 import { SimpleDialogComponent } from './shared/simple-dialog/simple-dialog.component';
+import { ToolbarComponent } from './shared/toolbar/toolbar.component';
 
+// pipes
 import { StripHtmlTagsPipe } from './pipe/strip-html-tags.pipe';
+import { UpperCaseFirstLetterPipe } from './pipe/upper-case-first-letter.pipe';
+import { TodayPipe } from './pipe/today.pipe';
 
 // media player component
 import { VgCoreModule } from 'videogular2/core';
@@ -35,8 +43,19 @@ import { VgControlsModule } from 'videogular2/controls';
 import { VgOverlayPlayModule } from 'videogular2/overlay-play';
 import { VgBufferingModule } from 'videogular2/buffering';
 import { SingleMediaPlayerComponent } from './shared/single-media-player/single-media-player.component';
-import { UpperCaseFirstLetterPipe } from './pipe/upper-case-first-letter.pipe';
-import { TodayPipe } from './pipe/today.pipe';
+
+export const firebaseConfig = {
+  apiKey: "AIzaSyBqUwpcipAsqWtLtIlRlDpNfOT38B-sYwo",
+  authDomain: "learnwild-d9b69.firebaseapp.com",
+  databaseURL: "https://learnwild-d9b69.firebaseio.com",
+  projectId: "learnwild-d9b69",
+  storageBucket: "learnwild-d9b69.appspot.com",
+  messagingSenderId: "187124471014"
+};
+
+const routes: Routes = [];
+//   { path: '', component: AppComponent }
+// ]
 
 @NgModule({
 
@@ -44,6 +63,7 @@ import { TodayPipe } from './pipe/today.pipe';
     AppComponent,
     Dashboard,
     DashboardComponentOutlet,
+
     RssComponent,
     NytComponent,
 
@@ -52,20 +72,18 @@ import { TodayPipe } from './pipe/today.pipe';
     TodayPipe,
 
     SimpleDialogComponent,
-    SingleMediaPlayerComponent
+    SingleMediaPlayerComponent,
+    ToolbarComponent
   ],
 
   imports: [
     BrowserModule,
     FormsModule,
-    // RouterModule.forRoot([
-    //   {
-    //     path: '',
-    //     redirectTo: '/home',
-    //     pathMatch: 'full'
-    //   }
-    // ]),
+    RouterModule.forRoot(routes),
     HttpModule,
+    AngularFireModule.initializeApp(firebaseConfig),
+    AngularFireAuthModule,
+    AngularFireDatabaseModule,
     MasonryModule,
 
     BrowserAnimationsModule,
@@ -82,6 +100,7 @@ import { TodayPipe } from './pipe/today.pipe';
     RssService,
     NytService,
     DialogService,
+    AuthService,
     NgRadio
   ],
 
@@ -95,7 +114,8 @@ import { TodayPipe } from './pipe/today.pipe';
   entryComponents: [
     RssComponent,
     NytComponent,
-    SimpleDialogComponent
+    SimpleDialogComponent,
+    ToolbarComponent
   ]
 })
 export class AppModule { }

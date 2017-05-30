@@ -1,4 +1,5 @@
 import { Component, Input, Output, EventEmitter, ViewChild } from '@angular/core';
+import { DatePipe } from '@angular/common';
 import { DashboardComponent } from '../../dashboard-component';
 import { RssService } from './rss.service';
 import { FeedInfo, FeedEntry, FeedEnclosure } from '../../../model/feed';
@@ -85,7 +86,7 @@ export class RssComponent implements DashboardComponent {
 
   openDialog(feedEntry: FeedEntry) {
     // console.log(feedEntry);
-    const title = feedEntry.title + ' | ' + feedEntry.pubDate;
+    const title = feedEntry.title + ' | ' + new DatePipe('en-US').transform(feedEntry.pubDate, 'yyyy-MM-dd');    
     this.dialogService.confirm(title, feedEntry.description);
   }
 
