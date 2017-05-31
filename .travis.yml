@@ -16,21 +16,21 @@ before_script:
 
 script:
   - ng build
-  #- git remote add origin https://$GH_TOKEN@github.com/ultrarunner/learn-wild.git/  
-  #- git add .
-  #- git commit -m "Travis CI build."
-  #- git push origin master
+  - git remote add origin $AZURE_REPO_URL  
+  - git add .
+  - git commit -m "Travis CI build."
+  - git push origin master
 
-# deploy:  
-#   provider: azure_web_apps
-#   username: $AZURE_USERNAME
-#   password: $AZURE_PASSWORD
-#   site: LearnWild
-#   skip_cleanup: true
-#   verbose: true
-#   file: "dist/"
-#   on:
-#     branch: master
+deploy:  
+  provider: azure_web_apps
+  username: $AZURE_USERNAME
+  password: $AZURE_PASSWORD
+  site: LearnWild
+  skip_cleanup: true
+  verbose: true
+  file: "dist/"
+  on:
+    branch: master
   
 after_success:
   - firebase deploy --token $FIREBASE_TOKEN
