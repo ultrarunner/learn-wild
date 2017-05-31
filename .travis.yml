@@ -21,16 +21,16 @@ script:
   #- git commit -m "Travis CI build."
   #- git push origin master
 
-deploy:  
-  provider: azure_web_apps
-  username: $AZURE_USERNAME
-  password: $AZURE_PASSWORD
-  site: LearnWild
-  skip_cleanup: false
-  verbose: true
-  file: "dist/"
-  on:
-    branch: master
+# deploy:  
+#   provider: azure_web_apps
+#   username: $AZURE_USERNAME
+#   password: $AZURE_PASSWORD
+#   site: LearnWild
+#   skip_cleanup: true
+#   verbose: true
+#   file: "dist/"
+#   on:
+#     branch: master
   
 after_success:
   - firebase deploy --token $FIREBASE_TOKEN
