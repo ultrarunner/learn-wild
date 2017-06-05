@@ -10,7 +10,7 @@ interface RadioMessage {
   data?: any;
 }
 
-export class NgRadio {
+export class EventService {
   private _eventBus: Subject<RadioMessage>;
   private separator = ':';
 

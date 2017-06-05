@@ -20,6 +20,7 @@ export class RssService {
 
   private extractFeeds(res: Response): Feed {
     const feed = res.json();
+    console.log(feed);
     return feed || {};
   }
 

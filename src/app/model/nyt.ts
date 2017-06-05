@@ -10,4 +10,5 @@ export interface Result {
     url: string;
     short_url: string;
     published_date: Date;
+    today: boolean;
 }

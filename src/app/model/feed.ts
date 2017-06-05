@@ -23,6 +23,7 @@ export interface FeedEntry {
   description: string;
   content: string;
   enclosure: FeedEnclosure;
+  today: boolean;
 }
 
 export interface FeedEnclosure {

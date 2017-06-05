@@ -1,11 +1,13 @@
 import { Component, Input, Output, EventEmitter, ViewChild } from '@angular/core';
 import { DatePipe } from '@angular/common';
+import { TodayPipe } from '../../../pipe/today.pipe';
 import { DashboardComponent } from '../../dashboard-component';
 import { NytService } from './nyt.service';
 import { Nyt, Result } from '../../../model/nyt';
 import { UpperCaseFirstLetterPipe } from '../../../pipe/upper-case-first-letter.pipe';
 
 import { DialogService } from '../../../shared/simple-dialog/dialog.service';
+import { EventService } from '../../../shared/events.service';
 
 @Component({
   selector: 'app-component-nyt',
@@ -21,7 +23,7 @@ import { DialogService } from '../../../shared/simple-dialog/dialog.service';
         <md-card-content *ngIf="results.length">
           <md-list-item *ngFor="let item of results">         
             <button md-icon-button (click)="openDialog(item)">
-              <md-icon [style.color]="item.published_date | todayPipe">info</md-icon>
+              <md-icon [style.color]="item.today ? '#b62025' : 'white'">info</md-icon>
             </button>
           <button md-icon-button (click)='onOpenLink(item)' mdTooltip="Open Article in New Window" mdTooltipPosition="above">
             <md-icon>open_in_new</md-icon>
@@ -34,7 +36,8 @@ import { DialogService } from '../../../shared/simple-dialog/dialog.service';
             <md-icon>refresh</md-icon>
           </button>
         </md-card-actions>
-      </md-card>`
+      </md-card>`,
+  providers: [TodayPipe]
 })
 
 export class NytComponent implements DashboardComponent {
@@ -52,6 +55,8 @@ export class NytComponent implements DashboardComponent {
   constructor(
     private nytService: NytService,
     private dialogService: DialogService,
+    private radio: EventService,
+    private todayPipe: TodayPipe
   ) { }
 
   ngOnInit(): void {
@@ -68,8 +73,15 @@ export class NytComponent implements DashboardComponent {
       .subscribe(
       result => {
         // console.log(result.items);
-        this.nyt = result,
-          this.results = result.results.filter((item, index) => { return index < this.count; });
+        this.nyt = result;
+        this.results = result.results.filter((item, index) => {
+          item.today = this.todayPipe.transform(item.published_date.toString());
+          if (item.today && (index < this.count)) {
+            console.log('Hot Article (NYT) Radio Casting:' + item.title);
+            this.radio.cast("HotArticle:nyt", item);
+          }
+          return index < this.count;
+        });
       },
       error => console.log(error)
       );

@@ -1,14 +1,14 @@
 import { TestBed, inject } from '@angular/core/testing';
-import { NgRadio } from './events.service';
+import { EventService } from './events.service';
 
 describe('EventsService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [NgRadio]
+      providers: [EventService]
     });
   });
 
-  it('should ...', inject([NgRadio], (service: NgRadio) => {
+  it('should ...', inject([EventService], (service: EventService) => {
     expect(service).toBeTruthy();
   }));
 });

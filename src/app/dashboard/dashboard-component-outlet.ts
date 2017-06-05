@@ -10,7 +10,6 @@ import {
 } from '@angular/core';
 
 import { DashboardComponent } from './dashboard-component';
-import { FeedEnclosure } from '../model/feed';
 
 @Component({
     selector: 'dashboard-component-outlet',

@@ -6,6 +6,7 @@ import { DatePipe } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
 import { MaterialModule } from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { AngularFireAuthModule, AngularFireAuth } from 'angularfire2/auth';
@@ -28,7 +29,9 @@ import { NytService } from './dashboard/cards/nyt/nyt.service';
 // shared services
 import { AuthService } from './shared/auth.service';
 import { DialogService } from './shared/simple-dialog/dialog.service';
-import { NgRadio } from './shared/events.service';
+import { EventService } from './shared/events.service';
+import { EndPointService } from './shared/endpoint.service';
+
 import { SimpleDialogComponent } from './shared/simple-dialog/simple-dialog.component';
 import { ToolbarComponent } from './shared/toolbar/toolbar.component';
 
@@ -43,6 +46,7 @@ import { VgControlsModule } from 'videogular2/controls';
 import { VgOverlayPlayModule } from 'videogular2/overlay-play';
 import { VgBufferingModule } from 'videogular2/buffering';
 import { SingleMediaPlayerComponent } from './shared/single-media-player/single-media-player.component';
+import { HotComponent } from './dashboard/cards/hot/hot.component';
 
 export const firebaseConfig = {
   apiKey: "AIzaSyBqUwpcipAsqWtLtIlRlDpNfOT38B-sYwo",
@@ -73,7 +77,8 @@ const routes: Routes = [];
 
     SimpleDialogComponent,
     SingleMediaPlayerComponent,
-    ToolbarComponent
+    ToolbarComponent,
+    HotComponent
   ],
 
   imports: [
@@ -101,7 +106,8 @@ const routes: Routes = [];
     NytService,
     DialogService,
     AuthService,
-    NgRadio
+    EventService,
+    EndPointService
   ],
 
   bootstrap: [
@@ -114,6 +120,7 @@ const routes: Routes = [];
   entryComponents: [
     RssComponent,
     NytComponent,
+    HotComponent,
     SimpleDialogComponent,
     ToolbarComponent
   ]

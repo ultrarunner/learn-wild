@@ -1,10 +1,8 @@
 import { Component, ViewChild, AfterViewInit } from '@angular/core';
 import { AngularMasonry, MasonryOptions } from 'angular2-masonry';
 
-import { RssComponent } from './cards/rss/rss-component';
-import { FeedEnclosure } from '../model/feed';
-
-import { NytComponent } from './cards/nyt/nyt.component';
+import { EndPoint } from '../model/endpoint';
+import { EndPointService } from '../shared/endpoint.service';
 
 @Component({
     selector: 'dashboard',
@@ -29,6 +27,7 @@ export class Dashboard implements AfterViewInit {
     @ViewChild(AngularMasonry) masonry: AngularMasonry;
 
     selectedComponent: Dashboard;
+    componentInfos: EndPoint[] = [];
 
     options: MasonryOptions = {
         transitionDuration: '0.35',
@@ -37,100 +36,9 @@ export class Dashboard implements AfterViewInit {
         percentPosition: true
     };
 
-    private componentInfos = [
-        {
-            type: RssComponent,
-            title: 'Freakonomics',
-            end_point: 'http://feeds2.feedburner.com/freakonomicsradio',
-            count: 6
-        }
-        , {
-            type: NytComponent,
-            title: 'NYT - Top Stories',
-            end_point: '',
-            options: 'world',
-            count: 5
-        }
-        , {
-            type: NytComponent,
-            title: 'NYT - Top Stories',
-            end_point: '',
-            options: 'technology',
-            count: 7
-        }
-        , {
-            type: RssComponent,
-            title: 'Channel 9',
-            end_point: 'https://channel9.msdn.com/all/rss',
-            count: 8
-        }
-        , {
-            type: RssComponent,
-            title: 'Ted Talks',
-            end_point: 'https://www.ted.com/talks/rss',
-            count: 10
-        }
-        , {
-            type: RssComponent,
-            title: 'Adventures in Angular',
-            end_point: 'https://feeds.feedwrench.com/AdventuresInAngular.rss',
-            count: 10
-        }
-        , {
-            type: RssComponent,
-            title: 'Javascript Jabber',
-            end_point: 'https://feeds.feedwrench.com/JavascriptJabber.rss',
-            count: 5
-        }
-        , {
-            type: RssComponent,
-            title: 'Scott Hanselman\'s blog',
-            end_point: 'http://feeds.hanselman.com/scotthanselman',
-            count: 4
-        }
-        , {
-            type: RssComponent,
-            title: 'The Minimalists',
-            end_point: 'http://theminimalists.libsyn.com/rss',
-            count: 5
-        }
-        , {
-            type: RssComponent,
-            title: 'Hanselminutes',
-            end_point: 'http://feeds.podtrac.com/9dPm65vdpLL1',
-            count: 3
-        }
-        , {
-            type: RssComponent,
-            title: 'This American Life',
-            end_point: 'http://feed.thisamericanlife.org/talpodcast',
-            count: 2
-        }
-        , {
-            type: RssComponent,
-            title: 'Simple Talk',
-            end_point: 'https://www.simple-talk.com/feed/',
-            count: 5
-        }
-        , {
-            type: RssComponent,
-            title: 'NPR - Planet Money Podcast',
-            end_point: 'https://www.npr.org/rss/podcast.php?id=510289',
-            count: 5
-        }
-        , {
-            type: RssComponent,
-            title: 'Troy Hunt - Security Blog',
-            end_point: 'https://feeds.feedburner.com/TroyHunt',
-            count: 5
-        },
-        {
-            type: RssComponent,
-            title: 'John Papa - Blog',
-            end_point: 'https://johnpapa.net/rss/',
-            count: 5
-        }
-    ];
+    constructor(endpointService: EndPointService){
+        this.componentInfos = endpointService.endPoints;
+    }
 
     ngAfterViewInit() {
         this.masonry.layoutComplete.subscribe(() => {
