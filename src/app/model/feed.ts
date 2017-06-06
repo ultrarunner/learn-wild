@@ -13,6 +13,7 @@ export interface FeedInfo {
 }
 
 export interface FeedEntry {
+  feedtitle: string;
   title: string;
   link: string;
   guid: string;

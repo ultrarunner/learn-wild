@@ -14,7 +14,7 @@ import { EventService } from '../../../shared/events.service';
   template: `
       <md-card masonry-brick style="min-width: 280px; max-width: 412px; margin: 5px;" (click)="onSelected()">
         <md-card-header *ngIf="results.length">
-          <md-card-title>{{title}} <font color='red'>|</font> {{ options | upperCaseFirstLetter }}</md-card-title>
+          <md-card-title>{{title}} <font color='red'>|</font> {{ options.section | upperCaseFirstLetter }}</md-card-title>
         </md-card-header>
         <md-card-content *ngIf="!results.length">
           <md-spinner style="margin-bottom: 10px;"></md-spinner>              
@@ -48,7 +48,7 @@ export class NytComponent implements DashboardComponent {
   @Input() title: string;
   @Input() end_point: string;
   @Input() count: number;
-  @Input() options: string;
+  @Input() options: any;
 
   @Output() componentSelected = new EventEmitter();
 
@@ -76,6 +76,7 @@ export class NytComponent implements DashboardComponent {
         this.nyt = result;
         this.results = result.results.filter((item, index) => {
           item.today = this.todayPipe.transform(item.published_date.toString());
+          item.feedTitle = this.title;
           if (item.today && (index < this.count)) {
             //console.log('Hot Article (NYT) Radio Casting:' + item.title);
             this.radio.cast("HotArticle:nyt", item);
@@ -89,7 +90,7 @@ export class NytComponent implements DashboardComponent {
 
   openDialog(result: Result) {
     // console.log(feedEntry);
-    const title = result.title + ' | ' + new DatePipe('en-US').transform(result.published_date, 'yyyy-MM-dd');
+    const title = result.feedTitle + ' - ' + this.options.section + ' | ' + result.title + ' | ' + new DatePipe('en-US').transform(result.published_date, 'yyyy-MM-dd');
     this.dialogService.confirm(title, result.abstract);
   }
 

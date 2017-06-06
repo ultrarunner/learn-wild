@@ -4,6 +4,6 @@ export interface EndPoint {
     type: any;
     title: string;
     end_point: string;
-    options: string;
-    count: Number;
+    options: Object;
+    count: number;
 }

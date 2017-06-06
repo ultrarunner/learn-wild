@@ -15,10 +15,11 @@ import { TodayPipe } from '../../../pipe/today.pipe';
       <md-card masonry-brick style="min-width: 280px; max-width: 412px; margin: 5px;" (click)="onSelected()">
         <md-card-header>
           <div md-card-avatar><img src="/assets/borntolearnwild.png" style="margin-right: 10px; width:30px; height: 30px;"/></div>
-          <md-card-title>Today's Articles <font color="red">|</font> Born To Learn Wild</md-card-title>
+          <md-card-title>{{title}} <font color="red">|</font> Born To Learn Wild</md-card-title>
           <md-card-subtitle>Today's news from your sources.</md-card-subtitle>
         </md-card-header>
-        <md-card-content *ngIf="!nytItems.length">
+
+        <md-card-content *ngIf="!nytItems.length && !rssItems.length && !podcastItems.length">
           <md-spinner style="margin-bottom: 10px;"></md-spinner>              
           Waiting for latest news... {{end_point}}
         </md-card-content>
@@ -36,7 +37,7 @@ import { TodayPipe } from '../../../pipe/today.pipe';
             {{item.title}}            
           </md-list-item>
 
-          <!-- RSS ENTRIES -->
+          <!-- RSS ENTRIES - ARTICLES -->
           <md-list-item *ngFor="let item of rssItems">         
             <button md-icon-button (click)="onOpenRssDialog(item)" mdTooltip="View Summary">
               <md-icon [style.color]="item.today ? '#b62025' : 'white'">info</md-icon>
@@ -44,11 +45,22 @@ import { TodayPipe } from '../../../pipe/today.pipe';
             <button md-icon-button (click)='onOpenRssLink(item)' mdTooltip="Open in New Window" mdTooltipPosition="above">
               <md-icon>open_in_new</md-icon>
             </button>         
-            <button mdTooltip="Play Audio" md-icon-button *ngIf="item.enclosure.type != null" (click)="onSelectMedia(item.enclosure)">
+            {{item.title}}            
+          </md-list-item>
+
+          <!-- RSS ENTRIES - PODCASTS -->
+          <md-list-item *ngFor="let item of podcastItems">         
+            <button md-icon-button (click)="onOpenRssDialog(item)" mdTooltip="View Summary">
+              <md-icon [style.color]="item.today ? '#b62025' : 'white'">info</md-icon>
+            </button>
+            <button md-icon-button (click)='onOpenRssLink(item)' mdTooltip="Open in New Window" mdTooltipPosition="above">
+              <md-icon>open_in_new</md-icon>
+            </button>         
+            <button mdTooltip="Play Audio" md-icon-button *ngIf="item.enclosure.link != null" (click)="onSelectMedia(item.enclosure)">
               <md-icon>play_circle_filled</md-icon>
             </button>                    
             {{item.title}}            
-          </md-list-item>          
+          </md-list-item>                     
 
         </md-card-content>
       </md-card>
@@ -59,6 +71,7 @@ export class HotComponent implements DashboardComponent {
 
   private rssItems: any = [];
   private nytItems: any = [];
+  private podcastItems: any = [];
   private today: Date = new Date();
 
   @Input() title: string;
@@ -73,19 +86,30 @@ export class HotComponent implements DashboardComponent {
     private radio: EventService
   ) {
     this.nytItems = new Array<Object>();
+    this.rssItems = new Array<Object>();
+    this.podcastItems = new Array<Object>();
   }
 
   ngOnInit(): void {
     this.radio.on('HotArticle:nyt').subscribe(message => {
       //console.log('Hot Article (NYT) Radio Receiving:' + (<Result>message).title);
-      this.nytItems.push(<Result>message);
+      if (this.title == "Today's Articles") {
+        this.nytItems.push(<Result>message);
+      }
     });
-    console.log(this.nytItems.length);
-
     this.radio.on('HotArticle:rss').subscribe(message => {
       //console.log('Hot Article (RSS) Radio Receiving:' + (<FeedEntry>message).title);
-      this.rssItems.push(<FeedEntry>message);
+      if (this.title == "Today's Articles") {
+        this.rssItems.push(<FeedEntry>message);
+      }
     });
+    this.radio.on('HotPodcast:rss').subscribe(message => {
+      //console.log('Hot Article (RSS) Radio Receiving:' + (<FeedEntry>message).title);
+      if (this.title == "Today's Podcasts") {
+        this.podcastItems.push(<FeedEntry>message);
+      }
+    });
+    console.log("title: " + this.title);
   }
 
   onSelectMedia(enclosure: FeedEnclosure) {
@@ -106,7 +130,7 @@ export class HotComponent implements DashboardComponent {
   }
 
   onOpenNytDialog(item: Result) {
-    const title = item.title + ' | ' + new DatePipe('en-US').transform(item.published_date, 'yyyy-MM-dd');
+    const title = item.feedTitle + ' | ' + item.title + ' | ' + new DatePipe('en-US').transform(item.published_date, 'yyyy-MM-dd');
     this.dialogService.confirm(title, item.abstract);
   }
 
@@ -115,7 +139,7 @@ export class HotComponent implements DashboardComponent {
   }
 
   onOpenRssDialog(item: FeedEntry) {
-    const title = item.title + ' | ' + new DatePipe('en-US').transform(item.pubDate, 'yyyy-MM-dd');
+    const title = item.feedtitle + ' | ' + item.title + ' | ' + new DatePipe('en-US').transform(item.pubDate, 'yyyy-MM-dd');
     this.dialogService.confirm(title, item.description);
   }
 }

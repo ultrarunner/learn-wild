@@ -46,7 +46,7 @@ import { TodayPipe } from '../../../pipe/today.pipe';
         </md-card-actions>
       </md-card>
       `,
-      providers: [TodayPipe]
+  providers: [TodayPipe]
 })
 
 export class RssComponent implements DashboardComponent {
@@ -82,9 +82,15 @@ export class RssComponent implements DashboardComponent {
         this.feed = result.feed;
         this.items = result.items.filter((item, index) => {
           item.today = this.todayPipe.transform(item.pubDate.toString());
+          item.feedtitle = this.feed.title;
           if (item.today && (index < this.count)) {
-            //console.log('Hot Article (RSS) Radio Casting:' + item.title);
-            this.radio.cast("HotArticle:rss", item);
+            if (item.enclosure.link != null) {
+              console.log('Hot Podcast (RSS) Radio Casting:' + item.title);                            
+              this.radio.cast("HotPodcast:rss", item);
+            } else {
+              //console.log('Hot Article (RSS) Radio Casting:' + item.title);              
+              this.radio.cast("HotArticle:rss", item);
+            }
           }
           return index < this.count;
         });
@@ -95,7 +101,7 @@ export class RssComponent implements DashboardComponent {
 
   openDialog(feedEntry: FeedEntry) {
     // console.log(feedEntry);
-    const title = (<FeedInfo>this.feed).title + ' | ' + feedEntry.title + ' | ' + new DatePipe('en-US').transform(feedEntry.pubDate, 'yyyy-MM-dd');
+    const title = feedEntry.feedtitle + ' | ' + feedEntry.title + ' | ' + new DatePipe('en-US').transform(feedEntry.pubDate, 'yyyy-MM-dd');
     this.dialogService.confirm(title, feedEntry.description);
   }
 

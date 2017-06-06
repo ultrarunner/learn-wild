@@ -12,7 +12,7 @@ export class EndPointService {
     endPoints: EndPoint[] = [];
 
     constructor(public af: AngularFireDatabase) {
-        // this.items = af.list('/endpoints', {
+        // this.items = af.list('/endpoints',
         //   query: {
         //     limitToLast: 50
         //   }
@@ -21,37 +21,52 @@ export class EndPointService {
         this.endPoints = [
             {
                 type: HotComponent,
-                title: 'Latest Articles',
+                title: "Today's Articles",
                 end_point: '',
-                options: '',
+                options: {
+                    type: 'Article'
+                },
+                count: 0
+            },
+            {
+                type: HotComponent,
+                title: "Today's Podcasts",
+                end_point: '',
+                options: {
+                    type: 'Podcast'
+                },
                 count: 0
             },
             {
                 type: RssComponent,
                 title: 'Freakonomics',
                 end_point: 'http://feeds2.feedburner.com/freakonomicsradio',
-                options: '',
+                options: {},
                 count: 6
             },
             {
                 type: NytComponent,
                 title: 'NYT - Top Stories',
                 end_point: '',
-                options: 'world',
+                options: {
+                    section: 'World'
+                },
                 count: 5
             }
             , {
                 type: NytComponent,
                 title: 'NYT - Top Stories',
                 end_point: '',
-                options: 'technology',
+                options: {
+                    section: 'Technology'
+                },
                 count: 7
             }
             , {
                 type: RssComponent,
                 title: 'Channel 9',
                 end_point: 'https://channel9.msdn.com/all/rss',
-                options: '',
+                options: {},
                 count: 8
             }
             , {
@@ -67,91 +82,91 @@ export class EndPointService {
                 end_point: 'http://feeds2.feedburner.com/tedtalks_video/',
                 count: 5,
                 options: ''
-            }            
+            }
             , {
                 type: RssComponent,
                 title: 'Adventures in Angular',
                 end_point: 'https://feeds.feedwrench.com/AdventuresInAngular.rss',
-                options: '',
+                options: {},
                 count: 10
             }
             , {
                 type: RssComponent,
                 title: 'Javascript Jabber',
                 end_point: 'https://feeds.feedwrench.com/JavascriptJabber.rss',
-                options: '',
+                options: {},
                 count: 5
             }
             , {
                 type: RssComponent,
                 title: 'Scott Hanselman\'s blog',
                 end_point: 'http://feeds.hanselman.com/scotthanselman',
-                options: '',
+                options: {},
                 count: 4
             }
             , {
                 type: RssComponent,
                 title: 'The Minimalists',
                 end_point: 'http://theminimalists.libsyn.com/rss',
-                options: '',
+                options: {},
                 count: 5
             }
             , {
                 type: RssComponent,
                 title: 'Hanselminutes',
                 end_point: 'http://feeds.podtrac.com/9dPm65vdpLL1',
-                options: '',
+                options: {},
                 count: 3
             }
             , {
                 type: RssComponent,
                 title: 'This American Life',
                 end_point: 'http://feed.thisamericanlife.org/talpodcast',
-                options: '',
+                options: {},
                 count: 2
             }
             , {
                 type: RssComponent,
                 title: 'Simple Talk',
                 end_point: 'https://www.simple-talk.com/feed/',
-                options: '',
+                options: {},
                 count: 5
             }
             , {
                 type: RssComponent,
                 title: 'NPR - Planet Money Podcast',
                 end_point: 'https://www.npr.org/rss/podcast.php?id=510289',
-                options: '',
+                options: {},
                 count: 5
             }
             , {
                 type: RssComponent,
                 title: 'Troy Hunt - Security Blog',
                 end_point: 'https://feeds.feedburner.com/TroyHunt',
-                options: '',
+                options: {},
                 count: 5
             },
             {
                 type: RssComponent,
                 title: 'John Papa - Blog',
                 end_point: 'https://johnpapa.net/rss/',
-                options: '',
+                options: {},
                 count: 5
             },
             {
                 type: RssComponent,
                 title: 'TMSIDK',
                 end_point: 'http://rss.art19.com/tell-me-something-i-don-t-know',
-                options: '',
+                options: {},
                 count: 5
             },
             {
                 type: RssComponent,
                 title: 'Malcom Gladwell - Revisionist History',
                 end_point: 'http://feeds.feedburner.com/RevisionistHistory',
-                options: '',
+                options: {},
                 count: 12
-            }            
+            }
         ];
     }
 }

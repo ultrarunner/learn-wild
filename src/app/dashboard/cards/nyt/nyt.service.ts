@@ -16,13 +16,13 @@ export class NytService {
   constructor(private http: Http) {
   }
 
-  getFeedContent(options: string): Observable<Nyt> {
+  getFeedContent(options: any): Observable<Nyt> {
     let parameters: URLSearchParams = new URLSearchParams();
     parameters.set('api-key', this.nytApiTopStories.apikey);
     let requestOptions = new RequestOptions();
     requestOptions.search = parameters;
 
-    return this.http.get(this.nytBaseEndPoint + this.nytApiTopStories.endpoint.replace('{options}', options), requestOptions)
+    return this.http.get(this.nytBaseEndPoint + this.nytApiTopStories.endpoint.replace('{options}', options.section.toLowerCase()), requestOptions)
       .map(this.extractFeeds)
       .catch(this.handleError);
   }

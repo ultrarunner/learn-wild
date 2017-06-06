@@ -5,6 +5,7 @@ export interface Nyt {
 }
 
 export interface Result {
+    feedTitle: string;
     title: string;
     abstract: string;
     url: string;
