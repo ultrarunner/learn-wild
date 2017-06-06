@@ -56,11 +56,18 @@ export class EndPointService {
             }
             , {
                 type: RssComponent,
-                title: 'Ted Talks',
-                end_point: 'https://www.ted.com/talks/rss',
-                count: 10,
+                title: 'Ted Talks (Audio)',
+                end_point: 'http://feeds2.feedburner.com/tedtalks_audio/',
+                count: 5,
                 options: ''
             }
+            , {
+                type: RssComponent,
+                title: 'Ted Talks (Video)',
+                end_point: 'http://feeds2.feedburner.com/tedtalks_video/',
+                count: 5,
+                options: ''
+            }            
             , {
                 type: RssComponent,
                 title: 'Adventures in Angular',

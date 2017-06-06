@@ -77,7 +77,7 @@ export class NytComponent implements DashboardComponent {
         this.results = result.results.filter((item, index) => {
           item.today = this.todayPipe.transform(item.published_date.toString());
           if (item.today && (index < this.count)) {
-            console.log('Hot Article (NYT) Radio Casting:' + item.title);
+            //console.log('Hot Article (NYT) Radio Casting:' + item.title);
             this.radio.cast("HotArticle:nyt", item);
           }
           return index < this.count;

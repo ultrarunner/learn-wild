@@ -43,7 +43,10 @@ import { TodayPipe } from '../../../pipe/today.pipe';
             </button>
             <button md-icon-button (click)='onOpenRssLink(item)' mdTooltip="Open in New Window" mdTooltipPosition="above">
               <md-icon>open_in_new</md-icon>
-            </button>            
+            </button>         
+            <button mdTooltip="Play Audio" md-icon-button *ngIf="item.enclosure.type != null" (click)="onSelectMedia(item.enclosure)">
+              <md-icon>play_circle_filled</md-icon>
+            </button>                    
             {{item.title}}            
           </md-list-item>          
 
@@ -74,23 +77,23 @@ export class HotComponent implements DashboardComponent {
 
   ngOnInit(): void {
     this.radio.on('HotArticle:nyt').subscribe(message => {
-      console.log('Hot Article (NYT) Radio Receiving:' + (<Result>message).title);
+      //console.log('Hot Article (NYT) Radio Receiving:' + (<Result>message).title);
       this.nytItems.push(<Result>message);
     });
     console.log(this.nytItems.length);
 
-     this.radio.on('HotArticle:rss').subscribe(message => {
-      console.log('Hot Article (RSS) Radio Receiving:' + (<FeedEntry>message).title);
+    this.radio.on('HotArticle:rss').subscribe(message => {
+      //console.log('Hot Article (RSS) Radio Receiving:' + (<FeedEntry>message).title);
       this.rssItems.push(<FeedEntry>message);
-    });   
+    });
   }
 
   onSelectMedia(enclosure: FeedEnclosure) {
-    // console.log('Media Selection Radio Casting:' + enclosure.link);
-    // const mediaType = enclosure.type.substring(0, enclosure.type.indexOf('/'));
-    // const key = 'PlayMedia:' + mediaType;
-    // // console.log('key: ' + key);
-    // this.radio.cast(key, enclosure);
+    console.log('Media Selection Radio Casting:' + enclosure.link);
+    const mediaType = enclosure.type.substring(0, enclosure.type.indexOf('/'));
+    const key = 'PlayMedia:' + mediaType;
+    // console.log('key: ' + key);
+    this.radio.cast(key, enclosure);
   }
 
   onSelected() {
@@ -105,7 +108,7 @@ export class HotComponent implements DashboardComponent {
   onOpenNytDialog(item: Result) {
     const title = item.title + ' | ' + new DatePipe('en-US').transform(item.published_date, 'yyyy-MM-dd');
     this.dialogService.confirm(title, item.abstract);
-  }  
+  }
 
   onOpenRssLink(item: FeedEntry) {
     window.open(item.link, '_blank');
@@ -114,5 +117,5 @@ export class HotComponent implements DashboardComponent {
   onOpenRssDialog(item: FeedEntry) {
     const title = item.title + ' | ' + new DatePipe('en-US').transform(item.pubDate, 'yyyy-MM-dd');
     this.dialogService.confirm(title, item.description);
-  }  
+  }
 }
