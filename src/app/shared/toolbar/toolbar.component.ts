@@ -25,13 +25,13 @@ import * as firebase from 'firebase/app';
             
             <md-menu #menu="mdMenu">
                 <button md-menu-item (click)="googleLogin()" *ngIf="!(authService.user | async)">
-                    <button md-raised-button>Google</button>
+                    <button md-raised-button color="warn">Google</button>
                 </button>
                 <button md-menu-item (click)="githubLogin()" *ngIf="!(authService.user | async)">
-                    <button md-raised-button>GitHub</button>
+                    <button md-raised-button color="warn">GitHub</button>
                 </button>
                 <button md-menu-item (click)="twitterLogin()" *ngIf="!(authService.user | async)">
-                    <button md-raised-button>Twitter</button>
+                    <button md-raised-button color="warn">Twitter</button>
                 </button>                
                 <md-list class="mat-list-stacked" *ngIf="(authService.user | async)">
                     <md-list-item style="font-weight: bold;">{{profile}}</md-list-item>
