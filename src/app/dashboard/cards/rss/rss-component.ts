@@ -27,19 +27,19 @@ import { TodayPipe } from '../../../pipe/today.pipe';
             <button md-icon-button (click)="openDialog(item)" mdTooltip="View Summary">
               <md-icon [style.color]="item.today ? '#b62025' : 'white'">info</md-icon>
             </button>
-            <button md-icon-button (click)='onOpenItemLink(item)' mdTooltip="Open in New Window" mdTooltipPosition="above">
+            <a md-icon-button href="{{item.link}}" mdTooltip="Open in New Window" mdTooltipPosition="above" target="_blank">
               <md-icon>open_in_new</md-icon>
-            </button>            
-            <button mdTooltip="Play Audio" md-icon-button *ngIf="item.enclosure.type != null" (click)="onSelectMedia(item.enclosure)">
+            </a>            
+            <button mdTooltip="Play Audio" md-icon-button *ngIf="item.enclosure.type != null" (click)="onSelectMedia(item.enclosure)" mdTooltipPosition="above">
               <md-icon>play_circle_filled</md-icon>
             </button>            
             {{item.title}}            
           </md-list-item>
         </md-card-content>
         <md-card-actions style="text-align: right;">
-          <button md-mini-fab (click)='onOpenFeedLink()' mdTooltip="Open in New Window" mdTooltipPosition="above">
+          <a md-mini-fab href="{{feed.link}}" mdTooltip="Open in New Window" mdTooltipPosition="above" target="_blank">
             <md-icon>open_in_new</md-icon>
-          </button>
+          </a>
           <button md-mini-fab (click)='onPullData()' mdTooltip="Refresh" mdTooltipPosition="above">
             <md-icon>refresh</md-icon>
           </button>
@@ -85,7 +85,7 @@ export class RssComponent implements DashboardComponent {
           item.feedtitle = this.feed.title;
           if (item.today && (index < this.count)) {
             if (item.enclosure.link != null) {
-              console.log('Hot Podcast (RSS) Radio Casting:' + item.title);                            
+              //console.log('Hot Podcast (RSS) Radio Casting:' + item.title);                            
               this.radio.cast("HotPodcast:rss", item);
             } else {
               //console.log('Hot Article (RSS) Radio Casting:' + item.title);              
@@ -106,7 +106,7 @@ export class RssComponent implements DashboardComponent {
   }
 
   onSelectMedia(enclosure: FeedEnclosure) {
-    console.log('Media Selection Radio Casting:' + enclosure.link);
+    //console.log('Media Selection Radio Casting:' + enclosure.link);
     const mediaType = enclosure.type.substring(0, enclosure.type.indexOf('/'));
     const key = 'PlayMedia:' + mediaType;
     // console.log('key: ' + key);
@@ -118,9 +118,9 @@ export class RssComponent implements DashboardComponent {
     this.componentSelected.emit(this);
   }
 
-  onOpenItemLink(item: FeedEntry) {
-    window.open(item.link, '_blank');
-  }
+  // onOpenItemLink(item: FeedEntry) {
+  //   window.open(item.link, '_blank');
+  // }
 
   onOpenFeedLink() {
     window.open(this.feed.link, '_blank');

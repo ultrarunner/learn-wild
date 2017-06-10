@@ -1,32 +1,106 @@
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs/Observable';
 import { AngularFireAuth } from 'angularfire2/auth';
-import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
+import { Router } from '@angular/router';
+
 import * as firebase from 'firebase/app';
-import { Observable } from 'rxjs/Rx';
+import { FirebaseError } from 'firebase/app';
+
+// import UserInfo = firebase.UserInfo;
+
+export enum AuthProviders {
+  Github = 0,
+  Twitter = 1,
+  Facebook = 2,
+  Google = 3,
+  Password = 4,
+  Anonymous = 5,
+  Custom = 6
+}
 
 @Injectable()
-
 export class AuthService {
-  user: Observable<firebase.User> = Observable.empty();
+  public user: firebase.User;
+  public authState$: Observable<firebase.User>;
 
-  constructor(public angularFireAuth: AngularFireAuth, public angularFireDatabase: AngularFireDatabase) {
-    console.log(this.angularFireAuth.authState);
-    this.user = this.angularFireAuth.authState;
+  constructor(private angularFireAuth: AngularFireAuth, private router: Router) {
+    this.user = null;
+    this.authState$ = angularFireAuth.authState;
+
+    this.authState$.subscribe((user: firebase.User) => {
+      this.user = user;
+
+      console.log('authState$ changed', this.user);
+    });
   }
 
-  loginWithGoogle() {
-    return this.angularFireAuth.auth.signInWithPopup(new firebase.auth.GoogleAuthProvider());
+  get authenticated(): boolean {
+    return this.user !== null;
   }
 
-  loginWithGithub() {
-    return this.angularFireAuth.auth.signInWithPopup(new firebase.auth.GithubAuthProvider());
+  get id(): string {
+    return this.authenticated ? this.user.uid : null;
   }
 
-  loginWithTwitter() {
-    return this.angularFireAuth.auth.signInWithPopup(new firebase.auth.TwitterAuthProvider());
+  signIn(providerId: number): firebase.Promise<firebase.auth.UserCredential> {
+    let provider: firebase.auth.AuthProvider = null;
+
+    switch (providerId) {
+      case AuthProviders.Github:
+        provider = new firebase.auth.GithubAuthProvider();
+        break;
+      case AuthProviders.Twitter:
+        provider = new firebase.auth.TwitterAuthProvider();
+        break;
+      case AuthProviders.Facebook:
+        provider = new firebase.auth.FacebookAuthProvider();
+        break;
+      case AuthProviders.Google:
+        provider = new firebase.auth.GoogleAuthProvider();
+        break;
+    }
+
+    return firebase.auth()
+      .signInWithPopup(provider)
+      .then((result: firebase.auth.UserCredential) => {
+        // The signed-in user info.
+        this.user = result.user;
+        this.router.navigate['/protected'];
+        //return this.user;
+      }).catch((error: FirebaseError) => {
+        // Handle Errors here.
+        const errorCode = error.code;
+        const errorMessage = error.message;
+
+        if (errorCode === 'authService/account-exists-with-different-credential') {
+          alert('You have signed up with a different provider for that email.');
+          // Handle linking here if your app allows it.
+        } else {
+
+        }
+        console.error('ERROR @ AuthService#signIn() :', error);
+      });
+
   }
 
-  logout() {
-    return this.angularFireAuth.auth.signOut();
+  signInWithGithub(): firebase.Promise<firebase.auth.UserCredential> {
+    return this.signIn(AuthProviders.Github);
+  }
+
+  signInWithTwitter(): firebase.Promise<firebase.auth.UserCredential> {
+    return this.signIn(AuthProviders.Twitter);
+  }
+
+  signInWithFacebook(): firebase.Promise<firebase.auth.UserCredential> {
+    return this.signIn(AuthProviders.Facebook);
+  }
+
+  signInWithGoogle(): firebase.Promise<firebase.auth.UserCredential> {
+    return this.signIn(AuthProviders.Google);
+  }
+
+  signOut(): void {
+    this.angularFireAuth.auth.signOut();
+    this.router.navigate['/home'];
   }
 }

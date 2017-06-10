@@ -31,6 +31,7 @@ import { AuthService } from './shared/auth.service';
 import { DialogService } from './shared/simple-dialog/dialog.service';
 import { EventService } from './shared/events.service';
 import { EndPointService } from './shared/endpoint.service';
+import { AuthGuardService } from './shared/auth-guard.service';
 
 import { SimpleDialogComponent } from './shared/simple-dialog/simple-dialog.component';
 import { ToolbarComponent } from './shared/toolbar/toolbar.component';
@@ -47,6 +48,9 @@ import { VgOverlayPlayModule } from 'videogular2/overlay-play';
 import { VgBufferingModule } from 'videogular2/buffering';
 import { SingleMediaPlayerComponent } from './shared/single-media-player/single-media-player.component';
 import { HotComponent } from './dashboard/cards/hot/hot.component';
+import { LoginComponent } from './login/login.component';
+import { ProtectedComponent } from './protected/protected.component';
+import { HomeComponent } from './home/home.component';
 
 export const firebaseConfig = {
   apiKey: "AIzaSyBqUwpcipAsqWtLtIlRlDpNfOT38B-sYwo",
@@ -57,14 +61,33 @@ export const firebaseConfig = {
   messagingSenderId: "187124471014"
 };
 
-const routes: Routes = [];
-//   { path: '', component: AppComponent }
-// ]
+const routes: Routes = [
+  {
+    path: '',
+    redirectTo: '/home',
+    pathMatch: 'full'
+  },
+  {
+    path: 'home',
+    component: HomeComponent
+  },
+  {
+    path: 'login',
+    component: LoginComponent
+  },
+  {
+    path: 'protected',
+    component: ProtectedComponent,
+    canActivate: [AuthGuardService]
+  }
+]
 
 @NgModule({
 
   declarations: [
     AppComponent,
+    LoginComponent,
+    ProtectedComponent,
     Dashboard,
     DashboardComponentOutlet,
 
@@ -78,7 +101,8 @@ const routes: Routes = [];
     SimpleDialogComponent,
     SingleMediaPlayerComponent,
     ToolbarComponent,
-    HotComponent
+    HotComponent,
+    HomeComponent
   ],
 
   imports: [
@@ -107,7 +131,8 @@ const routes: Routes = [];
     DialogService,
     AuthService,
     EventService,
-    EndPointService
+    EndPointService,
+    AuthGuardService
   ],
 
   bootstrap: [

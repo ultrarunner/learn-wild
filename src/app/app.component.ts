@@ -1,12 +1,11 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
     selector: 'app-root',
     template: `
         <toolbar></toolbar>
-        <div style="margin-top:5px;">
-            <dashboard></dashboard>
-        </div>        
+        <router-outlet></router-outlet>   
     `
 })
 

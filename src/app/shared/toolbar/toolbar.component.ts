@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
 import { AuthService } from '../auth.service';
 import * as firebase from 'firebase/app';
+import { Router } from '@angular/router';
+import { FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2/database';
 
 @Component({
     selector: 'toolbar',
@@ -19,71 +20,76 @@ import * as firebase from 'firebase/app';
             <span style="width: 100%"><app-single-media-player></app-single-media-player></span>
 
             <button md-icon-button [mdMenuTriggerFor]="menu">
-                <md-icon style="color: white;" *ngIf="!(authService.user | async)">account_circle</md-icon>
-                <md-icon style="color: white;" *ngIf="(authService.user | async)">face</md-icon>
+                <md-icon style="color: white;" *ngIf="!(currentUser)">account_circle</md-icon>
+                <md-icon style="color: white;" *ngIf="(currentUser)">face</md-icon>
             </button>
             
             <md-menu #menu="mdMenu">
-                <button md-menu-item (click)="googleLogin()" *ngIf="!(authService.user | async)">
+                <button md-menu-item (click)="googleLogin()" *ngIf="!(currentUser)">
                     <button md-raised-button color="warn">Google</button>
                 </button>
-                <button md-menu-item (click)="githubLogin()" *ngIf="!(authService.user | async)">
+                <button md-menu-item (click)="githubLogin()" *ngIf="!(currentUser)">
                     <button md-raised-button color="warn">GitHub</button>
                 </button>
-                <button md-menu-item (click)="twitterLogin()" *ngIf="!(authService.user | async)">
+                <button md-menu-item (click)="twitterLogin()" *ngIf="!(currentUser)">
                     <button md-raised-button color="warn">Twitter</button>
                 </button>                
-                <md-list class="mat-list-stacked" *ngIf="(authService.user | async)">
-                    <md-list-item style="font-weight: bold;">{{profile}}</md-list-item>
+                <md-list class="mat-list-stacked" *ngIf="(currentUser)">
+                    <md-list-item style="font-weight: bold;">{{currentUser.email}}</md-list-item>
                 </md-list>                
-                <button md-menu-item (click)="logout()" *ngIf="(authService.user | async)">
+                <button md-menu-item (click)="logout()" *ngIf="(currentUser)">
                     <button md-raised-button>Logout</button>
                 </button>                
             </md-menu>
         </md-toolbar>
-        <router-outlet></router-outlet>
     `
 })
 
 export class ToolbarComponent {
 
-    private profile: string = "";
-    private user: firebase.User;
+    currentUser$: FirebaseObjectObservable<firebase.User>;
+    currentUser: firebase.User;
 
     constructor(public authService: AuthService, private router: Router) {
-        console.log("Hello from the toolbar component...");
-        this.authService.user.subscribe((user) => {
-            if (user == null) {
-
-            }
-            else {
-                this.user = user;
-                this.profile = user.displayName != null ? user.displayName : user.email != null ? user.email : "None";
-                console.log(user);
+        authService.authState$.subscribe(authUser => {
+            if (authUser != null) {
+                console.log("user: " + authUser.email);
+                this.currentUser = authUser;
+            } else {
+                console.log("user: NONE");
+                this.currentUser = null;
             }
         });
     }
 
-    googleLogin() {
-        this.authService.loginWithGoogle().then((data) => {
-            //console.log(data);
+    googleLogin(): void {
+        this.authService.signInWithGoogle().then(() => {
+            console.log("redirecting to protected route from GOOGLE...");
+            //this.postSignIn();
         })
     }
 
-    githubLogin() {
-        this.authService.loginWithGithub().then((data) => {
-            //console.log(data.additionalUserInfo);
+    githubLogin(): void {
+        this.authService.signInWithGithub().then(() => {
+            console.log("redirecting to protected route from GITHUB...");
+            //this.postSignIn();            
         })
     }
 
-    twitterLogin() {
-        this.authService.loginWithTwitter().then((data) => {
-            //console.log(data.additionalUserInfo);
+    twitterLogin(): void {
+        this.authService.signInWithTwitter().then(() => {
+            console.log("redirecting to protected route from TWITTER...");
+            //this.postSignIn();            
         })
     }
 
-    logout() {
-        this.authService.logout();
-        console.log("signed out.");
+    logout(): void {
+        console.log("signed out. redirecting to home page.");
+        this.authService.signOut();
+        //this.router.navigate[''];
+    }
+
+    postSignIn(): void {
+        this.router.navigate["/protected"];
     }
 }

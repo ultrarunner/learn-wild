@@ -20,8 +20,9 @@ import { TodayPipe } from '../../../pipe/today.pipe';
         </md-card-header>
 
         <md-card-content *ngIf="!nytItems.length && !rssItems.length && !podcastItems.length">
-          <md-spinner style="margin-bottom: 10px;"></md-spinner>              
-          Waiting for latest news... {{end_point}}
+          <md-list-item>         
+            Waiting for latest news... Nothing so far. Great news!
+          </md-list-item>
         </md-card-content>
 
         <md-card-content>
@@ -109,7 +110,7 @@ export class HotComponent implements DashboardComponent {
         this.podcastItems.push(<FeedEntry>message);
       }
     });
-    console.log("title: " + this.title);
+    //console.log("title: " + this.title);
   }
 
   onSelectMedia(enclosure: FeedEnclosure) {
