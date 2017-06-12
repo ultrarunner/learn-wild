@@ -27,9 +27,9 @@ import { TodayPipe } from '../../../pipe/today.pipe';
             <button md-icon-button (click)="openDialog(item)" mdTooltip="View Summary">
               <md-icon [style.color]="item.today ? '#b62025' : 'white'">info</md-icon>
             </button>
-            <a md-icon-button href="{{item.link}}" mdTooltip="Open in New Window" mdTooltipPosition="above" target="_blank">
+            <button md-icon-button *ngIf="item && item.link" (click)="onOpenItemLink(item)" mdTooltip="Open in New Window" mdTooltipPosition="above">
               <md-icon>open_in_new</md-icon>
-            </a>            
+            </button>            
             <button mdTooltip="Play Audio" md-icon-button *ngIf="item.enclosure.type != null" (click)="onSelectMedia(item.enclosure)" mdTooltipPosition="above">
               <md-icon>play_circle_filled</md-icon>
             </button>            
@@ -37,9 +37,9 @@ import { TodayPipe } from '../../../pipe/today.pipe';
           </md-list-item>
         </md-card-content>
         <md-card-actions style="text-align: right;">
-          <a md-mini-fab href="{{feed.link}}" mdTooltip="Open in New Window" mdTooltipPosition="above" target="_blank">
+          <button md-mini-fab (click)="onOpenFeedLink(feed)" mdTooltip="Open in New Window" mdTooltipPosition="above" target="_blank">
             <md-icon>open_in_new</md-icon>
-          </a>
+          </button>
           <button md-mini-fab (click)='onPullData()' mdTooltip="Refresh" mdTooltipPosition="above">
             <md-icon>refresh</md-icon>
           </button>
@@ -80,20 +80,21 @@ export class RssComponent implements DashboardComponent {
       result => {
         //console.log(result.items);
         this.feed = result.feed;
-        this.items = result.items.filter((item, index) => {
-          item.today = this.todayPipe.transform(item.pubDate.toString());
-          item.feedtitle = this.feed.title;
-          if (item.today && (index < this.count)) {
-            if (item.enclosure.link != null) {
-              //console.log('Hot Podcast (RSS) Radio Casting:' + item.title);                            
-              this.radio.cast("HotPodcast:rss", item);
-            } else {
-              //console.log('Hot Article (RSS) Radio Casting:' + item.title);              
-              this.radio.cast("HotArticle:rss", item);
+        if (result && result.items)
+          this.items = result.items.filter((item, index) => {
+            item.today = this.todayPipe.transform(item.pubDate.toString());
+            item.feedtitle = this.feed.title;
+            if (item.today && (index < this.count)) {
+              if (item.enclosure.link != null) {
+                //console.log('Hot Podcast (RSS) Radio Casting:' + item.title);                            
+                this.radio.cast("HotPodcast:rss", item);
+              } else {
+                //console.log('Hot Article (RSS) Radio Casting:' + item.title);              
+                this.radio.cast("HotArticle:rss", item);
+              }
             }
-          }
-          return index < this.count;
-        });
+            return index < this.count;
+          });
       },
       error => console.log(error)
       );
@@ -118,9 +119,11 @@ export class RssComponent implements DashboardComponent {
     this.componentSelected.emit(this);
   }
 
-  // onOpenItemLink(item: FeedEntry) {
-  //   window.open(item.link, '_blank');
-  // }
+  onOpenItemLink(item: FeedEntry) {
+    if (item && item.link && item.link !== '') {
+      window.open(item.link, '_blank');
+    }
+  }
 
   onOpenFeedLink() {
     window.open(this.feed.link, '_blank');
