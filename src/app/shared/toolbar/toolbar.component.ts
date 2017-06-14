@@ -13,11 +13,12 @@ import { FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2/d
                     <img 
                     src="/assets/borntolearnwild.png" 
                     style="margin-right: 10px; width:30px; height: 30px;" 
-                    alt="Learn Wild | Not every site can become a great source of knowledge; but a great source of knowledge can come from any site.">
+                    title="Learn Wild | Not every site can become a great source of knowledge but a great source of knowledge can come from any site. Just keep learning.">
                 </a>                
             </span>
-            <span class="example-spacer"></span>
-            <span style="width: 100%"><app-single-media-player></app-single-media-player></span>
+            <span class="example-spacer" style="text-align:center; white-space:pre-wrap; font-size: 0.8em;">
+                Learn Wild <font color="red" > | </font> Not every site can become a great source of knowledge but a great source of knowledge can come from any site. Just keep learning.           
+            </span>
 
             <button md-icon-button [mdMenuTriggerFor]="menu">
                 <md-icon style="color: white;" *ngIf="!(currentUser)">account_circle</md-icon>
@@ -42,6 +43,9 @@ import { FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2/d
                 </button>                
             </md-menu>
         </md-toolbar>
+        <md-toolbar style="background-color: black;">
+            <span style="width: 100%"><app-single-media-player></app-single-media-player></span>        
+        </md-toolbar>
     `
 })
 
@@ -58,6 +62,7 @@ export class ToolbarComponent {
             } else {
                 console.log("user: NONE");
                 this.currentUser = null;
+                this.router.navigate["home"];                
             }
         });
     }
@@ -72,24 +77,27 @@ export class ToolbarComponent {
     githubLogin(): void {
         this.authService.signInWithGithub().then(() => {
             console.log("redirecting to protected route from GITHUB...");
-            //this.postSignIn();            
+            //this.postSignIn();
         })
     }
 
     twitterLogin(): void {
         this.authService.signInWithTwitter().then(() => {
             console.log("redirecting to protected route from TWITTER...");
-            //this.postSignIn();            
+            //this.postSignIn();
         })
     }
 
     logout(): void {
-        console.log("signed out. redirecting to home page.");
-        this.authService.signOut();
-        //this.router.navigate[''];
+        this.authService.signOut().then(() => {
+            console.log("signed out. redirecting to home page.");
+            if (this.authService.authState$ == null) {
+                this.router.navigate["/home"];
+            }
+        });
     }
 
     postSignIn(): void {
-        this.router.navigate["/protected"];
+        //this.router.navigate["/protected"];
     }
 }
