@@ -99,8 +99,7 @@ export class AuthService {
     return this.signIn(AuthProviders.Google);
   }
 
-  signOut(): void {
-    this.angularFireAuth.auth.signOut();
-    this.router.navigate['/home'];
+  signOut(): firebase.Promise<any> {
+    return this.angularFireAuth.auth.signOut();
   }
 }
