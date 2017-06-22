@@ -6,4 +6,5 @@ export interface EndPoint {
     end_point: string;
     options: Object;
     count: number;
+    active: boolean;
 }

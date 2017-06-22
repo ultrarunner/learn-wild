@@ -17,7 +17,7 @@ import { FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2/d
                 </a>                
             </span>
             <span class="example-spacer" style="text-align:center; white-space:pre-wrap; font-size: 0.6em;">
-                Learn Wild <font color="red" > | </font> Not every site can become a great source of knowledge but a great source of knowledge can come from any site. Just keep learning.           
+                Learn Wild <font color="red" > | </font> Never Stop Learning. Ever.           
             </span>
 
             <button md-icon-button [mdMenuTriggerFor]="menu">

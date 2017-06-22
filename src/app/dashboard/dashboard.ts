@@ -37,7 +37,9 @@ export class Dashboard implements AfterViewInit {
     };
 
     constructor(endpointService: EndPointService){
-        this.componentInfos = endpointService.endPoints;
+        this.componentInfos = endpointService.endPoints.filter((item, index) => {
+            return item.active === true;
+        });
     }
 
     ngAfterViewInit() {

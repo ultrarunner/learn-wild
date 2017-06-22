@@ -23,10 +23,11 @@ import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/databa
 
         <md-card-content>
           <md-list-item *ngFor="let item of items">         
-            <p>
-              <span>{{item.author}} <font color="red">|</font> {{item.source}}</span>
-             <br>{{item.text}}
-            </p>
+          <p>
+            <span style="float:left;">"{{item.text}}"</span>            
+            <span style="float:right;">{{item.author}}</span>
+            <span style="float:right; clear: both;">{{item.source}}</span>            
+          </p>
           </md-list-item>
         </md-card-content>
       </md-card>
@@ -55,7 +56,7 @@ export class QuoteComponent implements DashboardComponent {
 
   onPullData() {
     this.quoteService.getContent().subscribe(result => {
-      this.items = result;
-    });;
+      this.items.push(result[Math.floor(Math.random() * result.length)]);
+    });
   }
 }
