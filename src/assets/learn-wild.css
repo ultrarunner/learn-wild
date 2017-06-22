@@ -1,5 +1,6 @@
 md-dialog-container.mat-dialog-container {
     background-color: whitesmoke;
+    color: black;
 }
 
 md-dialog-container h2.mat-dialog-title {
