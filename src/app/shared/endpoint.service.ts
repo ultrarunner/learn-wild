@@ -5,6 +5,7 @@ import { EndPoint } from '../model/endpoint';
 import { RssComponent } from '../dashboard/cards/rss/rss-component';
 import { NytComponent } from '../dashboard/cards/nyt/nyt.component';
 import { HotComponent } from '../dashboard/cards/hot/hot.component';
+import { QuoteComponent } from '../dashboard/cards/quote/quote.component';
 
 @Injectable()
 export class EndPointService {
@@ -38,6 +39,13 @@ export class EndPointService {
                 },
                 count: 0
             },
+            {
+                type: QuoteComponent,
+                title: "Today's Quotes",
+                end_point: '',
+                options: {},
+                count: 0
+            },            
             {
                 type: RssComponent,
                 title: 'Freakonomics',

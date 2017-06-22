@@ -16,7 +16,7 @@ import { FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2/d
                     title="Learn Wild | Not every site can become a great source of knowledge but a great source of knowledge can come from any site. Just keep learning.">
                 </a>                
             </span>
-            <span class="example-spacer" style="text-align:center; white-space:pre-wrap; font-size: 0.8em;">
+            <span class="example-spacer" style="text-align:center; white-space:pre-wrap; font-size: 0.6em;">
                 Learn Wild <font color="red" > | </font> Not every site can become a great source of knowledge but a great source of knowledge can come from any site. Just keep learning.           
             </span>
 
@@ -59,6 +59,7 @@ export class ToolbarComponent {
             if (authUser != null) {
                 console.log("user: " + authUser.email);
                 this.currentUser = authUser;
+                this.router.navigate["protected"];                                
             } else {
                 console.log("user: NONE");
                 this.currentUser = null;

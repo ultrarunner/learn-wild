@@ -26,6 +26,9 @@ import { RssService } from './dashboard/cards/rss/rss.service';
 import { NytComponent } from './dashboard/cards/nyt/nyt.component';
 import { NytService } from './dashboard/cards/nyt/nyt.service';
 
+import { QuoteComponent } from './dashboard/cards/quote/quote.component';
+import { QuoteService } from './shared/quote.service';
+
 // shared services
 import { AuthService } from './shared/auth.service';
 import { DialogService } from './shared/simple-dialog/dialog.service';
@@ -102,7 +105,8 @@ const routes: Routes = [
     SingleMediaPlayerComponent,
     ToolbarComponent,
     HotComponent,
-    HomeComponent
+    HomeComponent,
+    QuoteComponent
   ],
 
   imports: [
@@ -128,6 +132,7 @@ const routes: Routes = [
     DatePipe,
     RssService,
     NytService,
+    QuoteService,
     DialogService,
     AuthService,
     EventService,
@@ -146,6 +151,7 @@ const routes: Routes = [
     RssComponent,
     NytComponent,
     HotComponent,
+    QuoteComponent,
     SimpleDialogComponent,
     ToolbarComponent
   ]

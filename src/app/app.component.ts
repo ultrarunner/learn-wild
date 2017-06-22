@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { AuthService } from './shared/auth.service';
 
 @Component({
     selector: 'app-root',
@@ -10,6 +11,8 @@ import { Router } from '@angular/router';
 })
 
 export class AppComponent {    
-    constructor() { 
+    
+    constructor(public authService: AuthService, private router: Router) {
+        
     }
 }
