@@ -14,7 +14,7 @@ export class AuthGuardService implements CanActivate {
     }
 
     canActivate(): Observable<boolean> {
-        return this.authService.authState$
+        return this.authService.authenticated$
             .take(1)
             .map(authState => !!authState)
             .do(authenticated => {

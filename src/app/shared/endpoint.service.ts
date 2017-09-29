@@ -45,7 +45,7 @@ export class EndPointService {
                 title: "Today's Quotes",
                 end_point: '',
                 options: {},
-                count: 0,
+                count: 1,
                 active: true
             },
             {
@@ -187,7 +187,15 @@ export class EndPointService {
                 options: {},
                 count: 12,
                 active: true                
-            }
+            },
+            {
+                type: RssComponent,
+                title: 'Sam Harris - Waking up',
+                end_point: 'http://wakingup.libsyn.com/rss',
+                options: {},
+                count: 4,
+                active: true                
+            }            
         ];
     }
 }

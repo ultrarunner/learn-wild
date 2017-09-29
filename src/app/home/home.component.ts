@@ -13,6 +13,7 @@ export class HomeComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+      console.log("hello from the home page...");
   }
 
 }

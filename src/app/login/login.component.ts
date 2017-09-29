@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-    selector: 'app-root',
+    selector: 'app-login',
     template: `
         <div style="margin-top:5px;">
           LOGIN ROUTE REACHED...

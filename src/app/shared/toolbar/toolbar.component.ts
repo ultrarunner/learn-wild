@@ -26,7 +26,7 @@ import { FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2/d
             </button>
             
             <md-menu #menu="mdMenu">
-                <button md-menu-item (click)="googleLogin()" *ngIf="!(currentUser)">
+                <button md-menu-item (click)="signInWithGoogle()" *ngIf="!(currentUser)">
                     <button md-raised-button color="warn">Google</button>
                 </button>
                 <button md-menu-item (click)="githubLogin()" *ngIf="!(currentUser)">
@@ -40,7 +40,7 @@ import { FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2/d
                 </md-list>                
                 <button md-menu-item (click)="logout()" *ngIf="(currentUser)">
                     <button md-raised-button>Logout</button>
-                </button>                
+                </button>
             </md-menu>
         </md-toolbar>
         <md-toolbar style="background-color: black;">
@@ -54,51 +54,34 @@ export class ToolbarComponent {
     currentUser$: FirebaseObjectObservable<firebase.User>;
     currentUser: firebase.User;
 
-    constructor(public authService: AuthService, private router: Router) {
-        authService.authState$.subscribe(authUser => {
-            if (authUser != null) {
-                console.log("user: " + authUser.email);
-                this.currentUser = authUser;
-                this.router.navigate["protected"];                                
-            } else {
-                console.log("user: NONE");
-                this.currentUser = null;
-                this.router.navigate["home"];                
-            }
-        });
-    }
+    constructor(private auth: AuthService, private router: Router) {}
 
-    googleLogin(): void {
-        this.authService.signInWithGoogle().then(() => {
-            console.log("redirecting to protected route from GOOGLE...");
-            //this.postSignIn();
-        })
-    }
+  signInAnonymously(): void {
+    this.auth.signInAnonymously()
+      .then(() => this.postSignIn());
+  }
 
-    githubLogin(): void {
-        this.authService.signInWithGithub().then(() => {
-            console.log("redirecting to protected route from GITHUB...");
-            //this.postSignIn();
-        })
-    }
+  signInWithFacebook(): void {
+    this.auth.signInWithFacebook()
+      .then(() => this.postSignIn());
+  }
 
-    twitterLogin(): void {
-        this.authService.signInWithTwitter().then(() => {
-            console.log("redirecting to protected route from TWITTER...");
-            //this.postSignIn();
-        })
-    }
+  signInWithGithub(): void {
+    this.auth.signInWithGithub()
+      .then(() => this.postSignIn());
+  }
 
-    logout(): void {
-        this.authService.signOut().then(() => {
-            console.log("signed out. redirecting to home page.");
-            if (this.authService.authState$ == null) {
-                this.router.navigate["/home"];
-            }
-        });
-    }
+  signInWithGoogle(): void {
+    this.auth.signInWithGoogle()
+      .then(() => this.postSignIn());
+  }
 
-    postSignIn(): void {
-        //this.router.navigate["/protected"];
-    }
+  signInWithTwitter(): void {
+    this.auth.signInWithTwitter()
+      .then(() => this.postSignIn());
+  }
+
+  private postSignIn(): void {
+    this.router.navigate(['/test']);
+  }
 }

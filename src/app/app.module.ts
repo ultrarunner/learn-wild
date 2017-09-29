@@ -54,6 +54,7 @@ import { HotComponent } from './dashboard/cards/hot/hot.component';
 import { LoginComponent } from './login/login.component';
 import { ProtectedComponent } from './protected/protected.component';
 import { HomeComponent } from './home/home.component';
+import { SignInComponent } from './shared/sign-in/sign-in.component';
 
 export const firebaseConfig = {
   apiKey: "AIzaSyBqUwpcipAsqWtLtIlRlDpNfOT38B-sYwo",
@@ -74,6 +75,10 @@ const routes: Routes = [
     path: 'home',
     component: HomeComponent
   },
+  {
+    path: 'test',
+    component: HomeComponent
+  },  
   {
     path: 'login',
     component: LoginComponent
@@ -106,7 +111,8 @@ const routes: Routes = [
     ToolbarComponent,
     HotComponent,
     HomeComponent,
-    QuoteComponent
+    QuoteComponent,
+    SignInComponent
   ],
 
   imports: [
@@ -156,4 +162,5 @@ const routes: Routes = [
     ToolbarComponent
   ]
 })
+
 export class AppModule { }
