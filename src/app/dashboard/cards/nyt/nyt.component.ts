@@ -21,14 +21,16 @@ import { EventService } from '../../../shared/events.service';
           Loading data from... {{end_point}}
         </md-card-content>
         <md-card-content *ngIf="results.length">
-          <md-list-item *ngFor="let item of results">         
-            <button md-icon-button (click)="openDialog(item)">
-              <md-icon [style.color]="item.today ? '#b62025' : 'white'">info</md-icon>
-            </button>
-          <button md-icon-button (click)='onOpenLink(item)' mdTooltip="Open Article in New Window" mdTooltipPosition="above">
-            <md-icon>open_in_new</md-icon>
-          </button>            
-            {{item.title}}             
+          <md-list-item *ngFor="let item of results">
+            <div class="md-list-item-text" layout="column">         
+              <button md-icon-button (click)="openDialog(item)">
+                <md-icon [style.color]="item.today ? '#b62025' : 'white'">info</md-icon>
+              </button>
+              <button md-icon-button (click)='onOpenLink(item)' mdTooltip="Open Article in New Window" mdTooltipPosition="above">
+                <md-icon>open_in_new</md-icon>
+              </button>            
+              {{item.title}}
+            </div>             
           </md-list-item>
         </md-card-content>
         <md-card-actions style="text-align: right;">

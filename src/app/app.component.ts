@@ -3,7 +3,6 @@ import { Router } from '@angular/router';
 import { AuthService } from './shared/auth.service';
 import * as firebase from 'firebase/app';
 import { Observable } from 'rxjs/Observable';
-
 import { FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2/database';
 
 @Component({
@@ -52,7 +51,6 @@ import { FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2/d
         <router-outlet></router-outlet> 
     `
 })
-//[routerLink]="['login']"
 
 export class AppComponent {
 

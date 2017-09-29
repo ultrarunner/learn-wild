@@ -28,39 +28,45 @@ import { TodayPipe } from '../../../pipe/today.pipe';
         <md-card-content>
 
           <!-- NYT ENTRIES -->
-          <md-list-item *ngFor="let item of nytItems">         
-            <button md-icon-button (click)="onOpenNytDialog(item)" mdTooltip="View Summary">
-              <md-icon [style.color]="item.today ? '#b62025' : 'white'">info</md-icon>
-            </button>
-            <button md-icon-button (click)='onOpenNytLink(item)' mdTooltip="Open in New Window" mdTooltipPosition="above">
-              <md-icon>open_in_new</md-icon>
-            </button>            
-            {{item.title}}            
+          <md-list-item *ngFor="let item of nytItems">
+            <div class="md-list-item-text" layout="column">                   
+              <button md-icon-button (click)="onOpenNytDialog(item)" mdTooltip="View Summary">
+                <md-icon [style.color]="item.today ? '#b62025' : 'white'">info</md-icon>
+              </button>
+              <button md-icon-button (click)='onOpenNytLink(item)' mdTooltip="Open in New Window" mdTooltipPosition="above">
+                <md-icon>open_in_new</md-icon>
+              </button>            
+              {{item.title}}
+            </div>            
           </md-list-item>
 
           <!-- RSS ENTRIES - ARTICLES -->
-          <md-list-item *ngFor="let item of rssItems">         
-            <button md-icon-button (click)="onOpenRssDialog(item)" mdTooltip="View Summary">
-              <md-icon [style.color]="item.today ? '#b62025' : 'white'">info</md-icon>
-            </button>
-            <button md-icon-button (click)='onOpenRssLink(item)' mdTooltip="Open in New Window" mdTooltipPosition="above">
-              <md-icon>open_in_new</md-icon>
-            </button>         
-            {{item.title}}            
+          <md-list-item *ngFor="let item of rssItems">
+            <div class="md-list-item-text" layout="column">                     
+              <button md-icon-button (click)="onOpenRssDialog(item)" mdTooltip="View Summary">
+                <md-icon [style.color]="item.today ? '#b62025' : 'white'">info</md-icon>
+              </button>
+              <button md-icon-button (click)='onOpenRssLink(item)' mdTooltip="Open in New Window" mdTooltipPosition="above">
+                <md-icon>open_in_new</md-icon>
+              </button>         
+              {{item.title}}
+            </div>
           </md-list-item>
 
           <!-- RSS ENTRIES - PODCASTS -->
-          <md-list-item *ngFor="let item of podcastItems">         
-            <button md-icon-button (click)="onOpenRssDialog(item)" mdTooltip="View Summary">
-              <md-icon [style.color]="item.today ? '#b62025' : 'white'">info</md-icon>
-            </button>
-            <button md-icon-button (click)='onOpenRssLink(item)' mdTooltip="Open in New Window" mdTooltipPosition="above">
-              <md-icon>open_in_new</md-icon>
-            </button>         
-            <button mdTooltip="Play Audio" md-icon-button *ngIf="item.enclosure.link != null" (click)="onSelectMedia(item.enclosure)">
-              <md-icon>play_circle_filled</md-icon>
-            </button>                    
-            {{item.title}}            
+          <md-list-item *ngFor="let item of podcastItems">
+            <div class="md-list-item-text" layout="column">                     
+              <button md-icon-button (click)="onOpenRssDialog(item)" mdTooltip="View Summary">
+                <md-icon [style.color]="item.today ? '#b62025' : 'white'">info</md-icon>
+              </button>
+              <button md-icon-button (click)='onOpenRssLink(item)' mdTooltip="Open in New Window" mdTooltipPosition="above">
+                <md-icon>open_in_new</md-icon>
+              </button>         
+              <button mdTooltip="Play Audio" md-icon-button *ngIf="item.enclosure.link != null" (click)="onSelectMedia(item.enclosure)">
+                <md-icon>play_circle_filled</md-icon>
+              </button>                    
+              {{item.title}}
+            </div>            
           </md-list-item>                     
 
         </md-card-content>

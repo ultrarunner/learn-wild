@@ -23,17 +23,19 @@ import { TodayPipe } from '../../../pipe/today.pipe';
           Loading data from... {{end_point}}
         </md-card-content>
         <md-card-content *ngIf="items.length">
-          <md-list-item *ngFor="let item of items">         
-            <button md-icon-button (click)="openDialog(item)" mdTooltip="View Summary">
-              <md-icon [style.color]="item.today ? '#b62025' : 'white'">info</md-icon>
-            </button>
-            <button md-icon-button *ngIf="item && item.link" (click)="onOpenItemLink(item)" mdTooltip="Open in New Window" mdTooltipPosition="above">
-              <md-icon>open_in_new</md-icon>
-            </button>            
-            <button mdTooltip="Play Audio" md-icon-button *ngIf="item.enclosure.type != null" (click)="onSelectMedia(item.enclosure)" mdTooltipPosition="above">
-              <md-icon>play_circle_filled</md-icon>
-            </button>            
-            {{item.title}}            
+          <md-list-item *ngFor="let item of items">
+            <div class="md-list-item-text" layout="column">                     
+              <button md-icon-button (click)="openDialog(item)" mdTooltip="View Summary">
+                <md-icon [style.color]="item.today ? '#b62025' : 'white'">info</md-icon>
+              </button>
+              <button md-icon-button *ngIf="item && item.link" (click)="onOpenItemLink(item)" mdTooltip="Open in New Window" mdTooltipPosition="above">
+                <md-icon>open_in_new</md-icon>
+              </button>            
+              <button mdTooltip="Play Audio" md-icon-button *ngIf="item.enclosure.type != null" (click)="onSelectMedia(item.enclosure)" mdTooltipPosition="above">
+                <md-icon>play_circle_filled</md-icon>
+              </button>            
+              {{item.title}}
+            </div>            
           </md-list-item>
         </md-card-content>
         <md-card-actions style="text-align: right;">
