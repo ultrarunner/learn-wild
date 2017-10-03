@@ -1,8 +1,11 @@
 import { Component, ViewChild, AfterViewInit } from '@angular/core';
 import { AngularMasonry, MasonryOptions } from 'angular2-masonry';
+import * as firebase from 'firebase/app';
+import { Observable } from 'rxjs/Observable';
 
-import { EndPoint } from '../model/endpoint';
+import { EndPoint, UserEndPoint } from '../model/endpoint';
 import { EndPointService } from '../shared/endpoint.service';
+import { AuthService } from '../shared/auth.service';
 
 @Component({
     selector: 'dashboard',
@@ -28,6 +31,7 @@ export class Dashboard implements AfterViewInit {
 
     selectedComponent: Dashboard;
     componentInfos: EndPoint[] = [];
+    userEndPoints: UserEndPoint[] = [];
 
     options: MasonryOptions = {
         transitionDuration: '0.35',
@@ -36,9 +40,24 @@ export class Dashboard implements AfterViewInit {
         percentPosition: true
     };
 
-    constructor(endpointService: EndPointService){
-        this.componentInfos = endpointService.endPoints.filter((item, index) => {
-            return item.active === true;
+    constructor(public authService: AuthService, public endpointService: EndPointService) {
+        authService.authenticated$.subscribe(authUser => {
+            if (authUser) {
+                authService.user$.subscribe(user => {
+                    if (user != null) {
+                        this.componentInfos = endpointService.getUserEndPoints(user.uid);
+                    }
+                    else {
+                        this.componentInfos = endpointService.endPoints.filter((item, index) => {
+                            return item.active === true;
+                        });
+                    }                    
+                });
+            } else {
+                this.componentInfos = endpointService.endPoints.filter((item, index) => {
+                    return item.active === true;
+                });
+            }
         });
     }
 

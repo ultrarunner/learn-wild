@@ -21,7 +21,7 @@ export class AuthGuardService implements CanActivate {
                 console.log("authenticated? " + authenticated);
                 if (!authenticated) {
                     console.log("navigating back to login...");
-                    this.router.navigate(['/login']);
+                    this.router.navigate(['/']);
                 }
             });
     }
