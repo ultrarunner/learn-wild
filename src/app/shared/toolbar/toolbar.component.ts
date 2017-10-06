@@ -4,6 +4,7 @@ import { AuthService } from '../../shared/auth.service';
 import * as firebase from 'firebase/app';
 import { Observable } from 'rxjs/Observable';
 import { FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2/database';
+import { MatMenu, MatMenuTrigger, MatMenuItem } from '@angular/material';
 
 @Component({
     selector: 'toolbar',
