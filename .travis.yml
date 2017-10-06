@@ -6,7 +6,7 @@ node_js:
 
 branches:
   only:
-    - master
+    #- master
     - dev
 
 before_script:
@@ -14,13 +14,13 @@ before_script:
   - npm install -g @angular/cli
 
 script:
-  - test $TRAVIS_BRANCH = "dev" &&  ng build
-  - test $TRAVIS_BRANCH = "master" && ng build -prod
+  - test $TRAVIS_BRANCH == "dev" && ng build
+  #- test $TRAVIS_BRANCH = "master" && ng build -prod
 
 after_success:
   #- firebase deploy --token $FIREBASE_TOKEN --project dev
-  - test $TRAVIS_BRANCH = "dev" && firebase deploy --token $FIREBASE_TOKEN --project dev
-  - test $TRAVIS_BRANCH = "master" && firebase deploy --token $FIREBASE_TOKEN --project prod
+  - test $TRAVIS_BRANCH == "dev" && firebase deploy --token $FIREBASE_TOKEN --project dev
+  #- test $TRAVIS_BRANCH = "master" && firebase deploy --token $FIREBASE_TOKEN --project prod
 
 notifications:
   email:
