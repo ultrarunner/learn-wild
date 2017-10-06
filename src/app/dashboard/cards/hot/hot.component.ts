@@ -76,10 +76,10 @@ import { TodayPipe } from '../../../pipe/today.pipe';
 
 export class HotComponent implements DashboardComponent {
 
-  private rssItems: any = [];
-  private nytItems: any = [];
-  private podcastItems: any = [];
-  private today: Date = new Date();
+  public rssItems: any = [];
+  public nytItems: any = [];
+  public podcastItems: any = [];
+  public today: Date = new Date();
 
   @Input() title: string;
   @Input() end_point: string;

@@ -19,20 +19,20 @@ export class EndPointService {
             return {
                 user_id: uid, //"sW1sbYPUpNeOYrpOjFB0HIGKll52",
                 end_point_id: val.end_point_id,
-                active: true
+                active: false
             }
         });
         // end - for now assign the entire list of end points to all users until it comes from angular db 
-        var uep = this.userEndPoints.filter((item, index) => {
-            return item.active === true && item.user_id === uid;
-        });
-        for (var i = 0; i < uep.length; i++) {
-            var endPoint = this.endPoints.filter((item, index) => {
-                return (item.active === true && item.end_point_id === uep[i].end_point_id);
-            })[0];
-            if (endPoint != null)
-                this.endPoints.push(endPoint);
-        }
+        // var uep = this.userEndPoints.filter((item, index) => {
+        //     return item.active === true && item.user_id === uid;
+        // });
+        // for (var i = 0; i < uep.length; i++) {
+        //     var endPoint = this.endPoints.filter((item, index) => {
+        //         return (item.active === true && item.end_point_id === uep[i].end_point_id);
+        //     })[0];
+        //     if (endPoint != null)
+        //         this.endPoints.push(endPoint);
+        // }
         return this.endPoints;
     }
 
@@ -53,7 +53,7 @@ export class EndPointService {
                     type: 'Article'
                 },
                 count: 0,
-                active: true
+                active: false
             },
             {
                 end_point_id: 2,
@@ -64,7 +64,7 @@ export class EndPointService {
                     type: 'Podcast'
                 },
                 count: 0,
-                active: true
+                active: false
             },
             {
                 end_point_id: 3,
@@ -73,7 +73,7 @@ export class EndPointService {
                 end_point: '',
                 options: {},
                 count: 1,
-                active: true
+                active: false
             },
             {
                 end_point_id: 4,
@@ -93,7 +93,7 @@ export class EndPointService {
                     section: 'World'
                 },
                 count: 5,
-                active: true
+                active: false
             }
             , {
                 end_point_id: 6,
@@ -104,7 +104,7 @@ export class EndPointService {
                     section: 'Technology'
                 },
                 count: 7,
-                active: true
+                active: false
             }
             , {
                 end_point_id: 7,
@@ -113,7 +113,7 @@ export class EndPointService {
                 end_point: 'http://feeds2.feedburner.com/tedtalks_audio/',
                 count: 5,
                 options: '',
-                active: true
+                active: false
             }
             , {
                 end_point_id: 8,
@@ -122,7 +122,7 @@ export class EndPointService {
                 end_point: 'http://feeds2.feedburner.com/tedtalks_video/',
                 count: 5,
                 options: '',
-                active: true
+                active: false
             }
             , {
                 end_point_id: 9,
@@ -131,7 +131,7 @@ export class EndPointService {
                 end_point: 'https://feeds.feedwrench.com/AdventuresInAngular.rss',
                 options: {},
                 count: 10,
-                active: true
+                active: false
             }
             , {
                 end_point_id: 10,
@@ -140,7 +140,7 @@ export class EndPointService {
                 end_point: 'https://feeds.feedwrench.com/JavascriptJabber.rss',
                 options: {},
                 count: 5,
-                active: true
+                active: false
             }
             , {
                 end_point_id: 11,
@@ -149,7 +149,7 @@ export class EndPointService {
                 end_point: 'http://feeds.hanselman.com/scotthanselman',
                 options: {},
                 count: 4,
-                active: true
+                active: false
             }
             , {
                 end_point_id: 12,
@@ -158,7 +158,7 @@ export class EndPointService {
                 end_point: 'http://theminimalists.libsyn.com/rss',
                 options: {},
                 count: 5,
-                active: true
+                active: false
             }
             , {
                 end_point_id: 13,
@@ -167,7 +167,7 @@ export class EndPointService {
                 end_point: 'http://feeds.podtrac.com/9dPm65vdpLL1',
                 options: {},
                 count: 3,
-                active: true
+                active: false
             }
             , {
                 end_point_id: 14,
@@ -176,7 +176,7 @@ export class EndPointService {
                 end_point: 'http://feed.thisamericanlife.org/talpodcast',
                 options: {},
                 count: 2,
-                active: true
+                active: false
             }
             , {
                 end_point_id: 15,
@@ -185,7 +185,7 @@ export class EndPointService {
                 end_point: 'https://www.simple-talk.com/feed/',
                 options: {},
                 count: 5,
-                active: true
+                active: false
             }
             , {
                 end_point_id: 16,
@@ -194,7 +194,7 @@ export class EndPointService {
                 end_point: 'https://www.npr.org/rss/podcast.php?id=510289',
                 options: {},
                 count: 5,
-                active: true
+                active: false
             }
             , {
                 end_point_id: 17,
@@ -203,7 +203,7 @@ export class EndPointService {
                 end_point: 'https://feeds.feedburner.com/TroyHunt',
                 options: {},
                 count: 5,
-                active: true
+                active: false
             },
             {
                 end_point_id: 18,
@@ -212,7 +212,7 @@ export class EndPointService {
                 end_point: 'https://johnpapa.net/rss/',
                 options: {},
                 count: 5,
-                active: true
+                active: false
             },
             {
                 end_point_id: 19,
@@ -221,7 +221,7 @@ export class EndPointService {
                 end_point: 'http://rss.art19.com/tell-me-something-i-don-t-know',
                 options: {},
                 count: 5,
-                active: true
+                active: false
             },
             {
                 end_point_id: 20,
@@ -230,7 +230,7 @@ export class EndPointService {
                 end_point: 'http://feeds.feedburner.com/RevisionistHistory',
                 options: {},
                 count: 12,
-                active: true
+                active: false
             },
             {
                 end_point_id: 21,
@@ -239,7 +239,7 @@ export class EndPointService {
                 end_point: 'http://wakingup.libsyn.com/rss',
                 options: {},
                 count: 4,
-                active: true
+                active: false
             }
         ];
     }

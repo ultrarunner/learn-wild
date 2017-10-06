@@ -44,8 +44,8 @@ import { EventService } from '../../../shared/events.service';
 
 export class NytComponent implements DashboardComponent {
 
-  private nyt: any = {};
-  private results: any = [];
+  public nyt: any = {};
+  public results: Result[] = [];
 
   @Input() title: string;
   @Input() end_point: string;

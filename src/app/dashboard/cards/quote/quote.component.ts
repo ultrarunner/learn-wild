@@ -43,11 +43,9 @@ export class QuoteComponent implements DashboardComponent {
 
   @Output() componentSelected = new EventEmitter();
 
-  private items: any = [];
+  items: Quote[] = [];
 
-  constructor(
-    private quoteService: QuoteService
-  ) {
+  constructor(private quoteService: QuoteService) {
   }
 
   ngOnInit(): void {
@@ -56,7 +54,14 @@ export class QuoteComponent implements DashboardComponent {
 
   onPullData() {
     this.quoteService.getContent().subscribe(result => {
-      this.items.push(result[Math.floor(Math.random() * result.length)]);
+      //console.log(result);
+      if (result.length)
+        this.items.push(result[Math.floor(Math.random() * result.length)]);
     });
   }
+
+  onSelected() {
+    // console.log('Component Selection Event Emitted:'  + this.end_point);
+    this.componentSelected.emit(this);
+  }  
 }

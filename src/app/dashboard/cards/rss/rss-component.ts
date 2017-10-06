@@ -39,7 +39,7 @@ import { TodayPipe } from '../../../pipe/today.pipe';
           </md-list-item>
         </md-card-content>
         <md-card-actions style="text-align: right;">
-          <button md-mini-fab (click)="onOpenFeedLink(feed)" mdTooltip="Open in New Window" mdTooltipPosition="above" target="_blank">
+          <button md-mini-fab (click)="onOpenFeedLink()" mdTooltip="Open in New Window" mdTooltipPosition="above" target="_blank">
             <md-icon>open_in_new</md-icon>
           </button>
           <button md-mini-fab (click)='onPullData()' mdTooltip="Refresh" mdTooltipPosition="above">
@@ -53,9 +53,9 @@ import { TodayPipe } from '../../../pipe/today.pipe';
 
 export class RssComponent implements DashboardComponent {
 
-  private feed: any = {};
-  private items: any = [];
-  private today: Date = new Date();
+  public feed: any = {};
+  public items: FeedEntry[] = [];
+  public today: Date = new Date();
 
   @Input() title: string;
   @Input() end_point: string;

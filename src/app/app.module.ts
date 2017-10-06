@@ -55,14 +55,15 @@ import { LoginComponent } from './login/login.component';
 import { ProtectedComponent } from './protected/protected.component';
 import { HomeComponent } from './home/home.component';
 import { SignInComponent } from './shared/sign-in/sign-in.component';
+import { environment } from '../environments/environment';
 
 export const firebaseConfig = {
-  apiKey: "AIzaSyBqUwpcipAsqWtLtIlRlDpNfOT38B-sYwo",
-  authDomain: "learnwild-d9b69.firebaseapp.com",
-  databaseURL: "https://learnwild-d9b69.firebaseio.com",
-  projectId: "learnwild-d9b69",
-  storageBucket: "learnwild-d9b69.appspot.com",
-  messagingSenderId: "187124471014"
+  apiKey: environment.firebaseConfig.apiKey, //"AIzaSyBqUwpcipAsqWtLtIlRlDpNfOT38B-sYwo",
+  authDomain: environment.firebaseConfig.authDomain, //"learnwild-d9b69.firebaseapp.com",
+  databaseURL: environment.firebaseConfig.databaseURL, // "https://learnwild-d9b69.firebaseio.com",
+  projectId: environment.firebaseConfig.projectId, // "learnwild-d9b69",
+  storageBucket: environment.firebaseConfig.storageBucket, //"learnwild-d9b69.appspot.com",
+  messagingSenderId: environment.firebaseConfig.messagingSenderId //"187124471014"
 };
 
 const routes: Routes = [

@@ -1,5 +1,6 @@
 {
   "projects": {
-    "default": "learnwild-d9b69"
+    "prod": "learnwild-d9b69",
+    "dev": "learn-wild-dev"
   }
 }
