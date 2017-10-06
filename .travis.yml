@@ -20,7 +20,7 @@ script:
 after_success:
   #- firebase deploy --token $FIREBASE_TOKEN --project dev
   - test $TRAVIS_BRANCH = "dev" && firebase deploy --token $FIREBASE_TOKEN --project dev
-  - test $TRAVIS_BRANCH = "dev" && firebase deploy --token $FIREBASE_TOKEN --project prod
+  - test $TRAVIS_BRANCH = "master" && firebase deploy --token $FIREBASE_TOKEN --project prod
 
 notifications:
   email:
