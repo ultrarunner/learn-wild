@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { MdDialog, MdDialogRef } from '@angular/material';
+import { MatDialog, MatDialogRef } from '@angular/material';
 
 @Component({
   selector: 'app-simple-dialog',
@@ -7,14 +7,13 @@ import { MdDialog, MdDialogRef } from '@angular/material';
       <h2 md-dialog-title>{{title}}</h2>
       <md-dialog-content [innerHtml]=message></md-dialog-content>
   `
-  //,styleUrls: ['./simple-dialog.component.css']
 })
 export class SimpleDialogComponent implements OnInit {
 
   public message: string;
   public title: string;
 
-  constructor(public dialogRef: MdDialogRef<SimpleDialogComponent>) { }
+  constructor(public dialogRef: MatDialogRef<SimpleDialogComponent>) { }
 
   ngOnInit() {
   }
