@@ -22,12 +22,12 @@ import { MatMenuModule, MatMenu, MatMenuTrigger, MatMenuItem } from '@angular/ma
             Learn Wild <font color="red" > | </font> Never Stop Learning. Ever.           
         </span>
 
-        <button md-icon-button [mdMenuTriggerFor]="menu">
+        <button md-icon-button [matMenuTriggerFor]="menu">
             <md-icon style="color: white;" *ngIf="!(currentUser)">account_circle</md-icon>
             <md-icon style="color: white;" *ngIf="(currentUser)">face</md-icon>
         </button>
         
-        <md-menu #menu="mdMenu">
+        <md-menu #menu="matMenu">
             <button md-menu-item (click)="googleLogin()" *ngIf="!(currentUser)">
                 <button md-raised-button color="warn">Google</button>
             </button>
