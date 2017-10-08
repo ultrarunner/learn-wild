@@ -27,7 +27,7 @@ import { MatMenuModule, MatMenu, MatMenuTrigger, MatMenuItem } from '@angular/ma
             <md-icon style="color: white;" *ngIf="(currentUser)">face</md-icon>
         </button>
         
-        <md-menu #menu="matMenu">
+        <md-menu #menu="mdMenu">
             <button md-menu-item (click)="googleLogin()" *ngIf="!(currentUser)">
                 <button md-raised-button color="warn">Google</button>
             </button>
