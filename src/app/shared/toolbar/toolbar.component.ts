@@ -9,7 +9,7 @@ import { MatMenuModule, MatMenu, MatMenuTrigger, MatMenuItem } from '@angular/ma
 @Component({
     selector: 'toolbar',
     template: `
-        <md-toolbar style="background-color: black;">
+    <mat-toolbar style="background-color: black;">
         <span style="color: white;">
             <a href="\">
                 <img 
@@ -18,33 +18,33 @@ import { MatMenuModule, MatMenu, MatMenuTrigger, MatMenuItem } from '@angular/ma
                 title="Learn Wild | Not every site can become a great source of knowledge but a great source of knowledge can come from any site. Just keep learning.">
             </a>                
         </span>
-        <span class="example-spacer" style="text-align:center; white-space:pre-wrap; font-size: 0.6em;">
+        <span class="example-spacer" style="color: white; text-align:center; white-space:pre-wrap; font-size: 0.6em;">
             Learn Wild <font color="red" > | </font> Never Stop Learning. Ever.           
         </span>
 
-        <button md-icon-button [matMenuTriggerFor]="menu">
-            <md-icon style="color: white;" *ngIf="!(currentUser)">account_circle</md-icon>
-            <md-icon style="color: white;" *ngIf="(currentUser)">face</md-icon>
+        <button mat-icon-button [matMenuTriggerFor]="appMenu">
+            <mat-icon style="color: white;" *ngIf="!(currentUser)">account_circle</mat-icon>
+            <mat-icon style="color: white;" *ngIf="(currentUser)">face</mat-icon>
         </button>
         
-        <md-menu #menu="mdMenu">
-            <button md-menu-item (click)="googleLogin()" *ngIf="!(currentUser)">
-                <button md-raised-button color="warn">Google</button>
+        <mat-menu #appMenu="matMenu">
+            <button mat-menu-item (click)="googleLogin()" *ngIf="!(currentUser)">
+                <button mat-raised-button color="warn">Google</button>
             </button>
-            <button md-menu-item (click)="githubLogin()" *ngIf="!(currentUser)">
-                <button md-raised-button color="warn">GitHub</button>
+            <button mat-menu-item (click)="githubLogin()" *ngIf="!(currentUser)">
+                <button mat-raised-button color="warn">GitHub</button>
             </button>
-            <button md-menu-item (click)="twitterLogin()" *ngIf="!(currentUser)">
-                <button md-raised-button color="warn">Twitter</button>
+            <button mat-menu-item (click)="twitterLogin()" *ngIf="!(currentUser)">
+                <button mat-raised-button color="warn">Twitter</button>
             </button>                
-            <button md-menu-item (click)="logout()" *ngIf="(currentUser)" title="{{currentUser.uid}} | {{currentUser.email}}">
-                <button md-raised-button>Logout</button>
+            <button mat-menu-item (click)="logout()" *ngIf="(currentUser)" title="{{currentUser.uid}} | {{currentUser.email}}">
+                <button mat-raised-button>Logout</button>
             </button>
-        </md-menu>
-    </md-toolbar>
-    <md-toolbar style="background-color: black;">
+        </mat-menu>
+    </mat-toolbar>
+    <mat-toolbar style="background-color: black;">
         <span style="width: 100%"><app-single-media-player></app-single-media-player></span>        
-    </md-toolbar>
+    </mat-toolbar>
     `
 })
 

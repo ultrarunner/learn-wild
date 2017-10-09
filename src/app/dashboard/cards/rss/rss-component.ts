@@ -12,41 +12,41 @@ import { TodayPipe } from '../../../pipe/today.pipe';
 @Component({
   selector: 'app-component-rss',
   template: `
-      <md-card masonry-brick style="min-width: 280px; max-width: 412px; margin: 5px;" (click)="onSelected()">
-        <md-card-header *ngIf="items.length">
-          <div md-card-avatar *ngIf="feed.image!=''"><img src="{{feed.image}}" style="width: 30px;"/></div>
-          <md-card-title>{{feed.title}} <font color="red">|</font> {{feed.author}}</md-card-title>
-          <md-card-subtitle>{{feed.description}} </md-card-subtitle>
-        </md-card-header>
-        <md-card-content *ngIf="!items.length">
-          <md-spinner style="margin-bottom: 10px;"></md-spinner>              
+      <mat-card masonry-brick style="min-width: 280px; max-width: 412px; margin: 5px;" (click)="onSelected()">
+        <mat-card-header *ngIf="items.length">
+          <div mat-card-avatar *ngIf="feed.image!=''"><img src="{{feed.image}}" style="width: 30px;"/></div>
+          <mat-card-title>{{feed.title}} <font color="red">|</font> {{feed.author}}</mat-card-title>
+          <mat-card-subtitle>{{feed.description}} </mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-content *ngIf="!items.length">
+          <mat-spinner style="margin-bottom: 10px;"></mat-spinner>              
           Loading data from... {{end_point}}
-        </md-card-content>
-        <md-card-content *ngIf="items.length">
-          <md-list-item *ngFor="let item of items">
-            <div class="md-list-item-text" layout="column">                     
-              <button md-icon-button (click)="openDialog(item)" mdTooltip="View Summary">
-                <md-icon [style.color]="item.today ? '#b62025' : 'white'">info</md-icon>
+        </mat-card-content>
+        <mat-card-content *ngIf="items.length">
+          <mat-list-item *ngFor="let item of items">
+            <div class="mat-list-item-text" layout="column">                     
+              <button mat-icon-button (click)="openDialog(item)" mdTooltip="View Summary">
+                <mat-icon [style.color]="item.today ? '#b62025' : 'white'">info</mat-icon>
               </button>
-              <button md-icon-button *ngIf="item && item.link" (click)="onOpenItemLink(item)" mdTooltip="Open in New Window" mdTooltipPosition="above">
-                <md-icon>open_in_new</md-icon>
+              <button mat-icon-button *ngIf="item && item.link" (click)="onOpenItemLink(item)" mdTooltip="Open in New Window" mdTooltipPosition="above">
+                <mat-icon>open_in_new</mat-icon>
               </button>            
-              <button mdTooltip="Play Audio" md-icon-button *ngIf="item.enclosure.type != null" (click)="onSelectMedia(item.enclosure)" mdTooltipPosition="above">
-                <md-icon>play_circle_filled</md-icon>
+              <button mdTooltip="Play Audio" mat-icon-button *ngIf="item.enclosure.type != null" (click)="onSelectMedia(item.enclosure)" mdTooltipPosition="above">
+                <mat-icon>play_circle_filled</mat-icon>
               </button>            
               {{item.title}}
             </div>            
-          </md-list-item>
-        </md-card-content>
-        <md-card-actions style="text-align: right;">
-          <button md-mini-fab (click)="onOpenFeedLink()" mdTooltip="Open in New Window" mdTooltipPosition="above" target="_blank">
-            <md-icon>open_in_new</md-icon>
+          </mat-list-item>
+        </mat-card-content>
+        <mat-card-actions style="text-align: right;">
+          <button mat-mini-fab (click)="onOpenFeedLink()" mdTooltip="Open in New Window" mdTooltipPosition="above" target="_blank">
+            <mat-icon>open_in_new</mat-icon>
           </button>
-          <button md-mini-fab (click)='onPullData()' mdTooltip="Refresh" mdTooltipPosition="above">
-            <md-icon>refresh</md-icon>
+          <button mat-mini-fab (click)='onPullData()' mdTooltip="Refresh" mdTooltipPosition="above">
+            <mat-icon>refresh</mat-icon>
           </button>
-        </md-card-actions>
-      </md-card>
+        </mat-card-actions>
+      </mat-card>
       `,
   providers: [TodayPipe]
 })

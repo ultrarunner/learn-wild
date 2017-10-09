@@ -12,65 +12,65 @@ import { TodayPipe } from '../../../pipe/today.pipe';
 @Component({
   selector: 'app-component-hot',
   template: `
-      <md-card masonry-brick style="min-width: 280px; max-width: 412px; margin: 5px;" (click)="onSelected()">
-        <md-card-header>
-          <div md-card-avatar><img src="/assets/borntolearnwild.png" style="margin-right: 10px; width:30px; height: 30px;"/></div>
-          <md-card-title>{{title}} <font color="red">|</font> Born To Learn Wild</md-card-title>
-          <md-card-subtitle>Today's news from your sources.</md-card-subtitle>
-        </md-card-header>
+      <mat-card masonry-brick style="min-width: 280px; max-width: 412px; margin: 5px;" (click)="onSelected()">
+        <mat-card-header>
+          <div mat-card-avatar><img src="/assets/borntolearnwild.png" style="margin-right: 10px; width:30px; height: 30px;"/></div>
+          <mat-card-title>{{title}} <font color="red">|</font> Born To Learn Wild</mat-card-title>
+          <mat-card-subtitle>Today's news from your sources.</mat-card-subtitle>
+        </mat-card-header>
 
-        <md-card-content *ngIf="!nytItems.length && !rssItems.length && !podcastItems.length">
-          <md-list-item>         
+        <mat-card-content *ngIf="!nytItems.length && !rssItems.length && !podcastItems.length">
+          <mat-list-item>         
             Waiting for latest news... Nothing so far. Great news!
-          </md-list-item>
-        </md-card-content>
+          </mat-list-item>
+        </mat-card-content>
 
-        <md-card-content>
+        <mat-card-content>
 
           <!-- NYT ENTRIES -->
-          <md-list-item *ngFor="let item of nytItems">
-            <div class="md-list-item-text" layout="column">                   
-              <button md-icon-button (click)="onOpenNytDialog(item)" mdTooltip="View Summary">
-                <md-icon [style.color]="item.today ? '#b62025' : 'white'">info</md-icon>
+          <mat-list-item *ngFor="let item of nytItems">
+            <div class="mat-list-item-text" layout="column">                   
+              <button mat-icon-button (click)="onOpenNytDialog(item)" mdTooltip="View Summary">
+                <mat-icon [style.color]="item.today ? '#b62025' : 'white'">info</mat-icon>
               </button>
-              <button md-icon-button (click)='onOpenNytLink(item)' mdTooltip="Open in New Window" mdTooltipPosition="above">
-                <md-icon>open_in_new</md-icon>
+              <button mat-icon-button (click)='onOpenNytLink(item)' mdTooltip="Open in New Window" mdTooltipPosition="above">
+                <mat-icon>open_in_new</mat-icon>
               </button>            
               {{item.title}}
             </div>            
-          </md-list-item>
+          </mat-list-item>
 
           <!-- RSS ENTRIES - ARTICLES -->
-          <md-list-item *ngFor="let item of rssItems">
-            <div class="md-list-item-text" layout="column">                     
-              <button md-icon-button (click)="onOpenRssDialog(item)" mdTooltip="View Summary">
-                <md-icon [style.color]="item.today ? '#b62025' : 'white'">info</md-icon>
+          <mat-list-item *ngFor="let item of rssItems">
+            <div class="mat-list-item-text" layout="column">                     
+              <button mat-icon-button (click)="onOpenRssDialog(item)" mdTooltip="View Summary">
+                <mat-icon [style.color]="item.today ? '#b62025' : 'white'">info</mat-icon>
               </button>
-              <button md-icon-button (click)='onOpenRssLink(item)' mdTooltip="Open in New Window" mdTooltipPosition="above">
-                <md-icon>open_in_new</md-icon>
+              <button mat-icon-button (click)='onOpenRssLink(item)' mdTooltip="Open in New Window" mdTooltipPosition="above">
+                <mat-icon>open_in_new</mat-icon>
               </button>         
               {{item.title}}
             </div>
-          </md-list-item>
+          </mat-list-item>
 
           <!-- RSS ENTRIES - PODCASTS -->
-          <md-list-item *ngFor="let item of podcastItems">
-            <div class="md-list-item-text" layout="column">                     
-              <button md-icon-button (click)="onOpenRssDialog(item)" mdTooltip="View Summary">
-                <md-icon [style.color]="item.today ? '#b62025' : 'white'">info</md-icon>
+          <mat-list-item *ngFor="let item of podcastItems">
+            <div class="mat-list-item-text" layout="column">                     
+              <button mat-icon-button (click)="onOpenRssDialog(item)" mdTooltip="View Summary">
+                <mat-icon [style.color]="item.today ? '#b62025' : 'white'">info</mat-icon>
               </button>
-              <button md-icon-button (click)='onOpenRssLink(item)' mdTooltip="Open in New Window" mdTooltipPosition="above">
-                <md-icon>open_in_new</md-icon>
+              <button mat-icon-button (click)='onOpenRssLink(item)' mdTooltip="Open in New Window" mdTooltipPosition="above">
+                <mat-icon>open_in_new</mat-icon>
               </button>         
-              <button mdTooltip="Play Audio" md-icon-button *ngIf="item.enclosure.link != null" (click)="onSelectMedia(item.enclosure)">
-                <md-icon>play_circle_filled</md-icon>
+              <button mdTooltip="Play Audio" mat-icon-button *ngIf="item.enclosure.link != null" (click)="onSelectMedia(item.enclosure)">
+                <mat-icon>play_circle_filled</mat-icon>
               </button>                    
               {{item.title}}
             </div>            
-          </md-list-item>                     
+          </mat-list-item>                     
 
-        </md-card-content>
-      </md-card>
+        </mat-card-content>
+      </mat-card>
       `
 })
 

@@ -8,29 +8,29 @@ import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/databa
 @Component({
   selector: 'app-quote',
   template: `
-      <md-card masonry-brick style="min-width: 280px; max-width: 412px; margin: 5px;" (click)="onSelected()">
-        <md-card-header>
-          <div md-card-avatar><img src="/assets/borntolearnwild.png" style="margin-right: 10px; width:30px; height: 30px;"/></div>
-          <md-card-title>{{title}} <font color="red">|</font> Born To Learn Wild</md-card-title>
-          <md-card-subtitle>A random quote.</md-card-subtitle>
-        </md-card-header>
+      <mat-card masonry-brick style="min-width: 280px; max-width: 412px; margin: 5px;" (click)="onSelected()">
+        <mat-card-header>
+          <div mat-card-avatar><img src="/assets/borntolearnwild.png" style="margin-right: 10px; width:30px; height: 30px;"/></div>
+          <mat-card-title>{{title}} <font color="red">|</font> Born To Learn Wild</mat-card-title>
+          <mat-card-subtitle>A random quote.</mat-card-subtitle>
+        </mat-card-header>
 
-        <md-card-content *ngIf="!items.length">
-          <md-list-item>         
+        <mat-card-content *ngIf="!items.length">
+          <mat-list-item>         
             Waiting for latest quote... Come on! Give me something!
-          </md-list-item>
-        </md-card-content>
+          </mat-list-item>
+        </mat-card-content>
 
-        <md-card-content>
-          <md-list-item *ngFor="let item of items">         
+        <mat-card-content>
+          <mat-list-item *ngFor="let item of items">         
           <p>
             <span style="float:left;">"{{item.text}}"</span>            
             <span style="float:right;">{{item.author}}</span>
             <span style="float:right; clear: both;">{{item.source}}</span>            
           </p>
-          </md-list-item>
-        </md-card-content>
-      </md-card>
+          </mat-list-item>
+        </mat-card-content>
+      </mat-card>
       `,
   styleUrls: ['./quote.component.css']
 })
