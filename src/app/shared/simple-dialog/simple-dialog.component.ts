@@ -4,8 +4,8 @@ import { MatDialog, MatDialogRef } from '@angular/material';
 @Component({
   selector: 'app-simple-dialog',
   template: `
-      <h2 md-dialog-title>{{title}}</h2>
-      <md-dialog-content [innerHtml]=message></md-dialog-content>
+      <h2 mat-dialog-title>{{title}}</h2>
+      <mat-dialog-content [innerHtml]=message></mat-dialog-content>
   `
 })
 export class SimpleDialogComponent implements OnInit {
