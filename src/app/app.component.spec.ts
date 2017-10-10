@@ -1,17 +1,35 @@
+import { Location } from "@angular/common";
 import { TestBed, async } from '@angular/core/testing';
-//import { RouterModule, Route } from '@angular/router';
+import { BrowserModule } from '@angular/platform-browser';
+import { NgModule } from '@angular/core';
+
+import { RouterTestingModule } from "@angular/router/testing";
+import { Router } from "@angular/router";
 import { AppComponent } from './app.component';
+
+// dashboard
+import { Dashboard } from './dashboard/dashboard';
+import { DashboardComponentOutlet } from './dashboard/dashboard-component-outlet';
+
+import { ToolbarComponent } from './shared/toolbar/toolbar.component';
+
+// import {
+//   routes
+// } from "./app.module"
 
 describe('AppComponent', () => {
   beforeEach(async(() => {
-    //const routes: Routes = [];    
     TestBed.configureTestingModule({
       declarations: [
-        AppComponent
+        AppComponent,
+        Dashboard,
+        DashboardComponentOutlet,
+        ToolbarComponent
       ],
       imports: [
-        //RouterModule.forRoot(routes, { useHash: true }),
-      ],      
+        BrowserModule,
+        //RouterTestingModule.withRoutes(routes),
+      ],
     }).compileComponents();
   }));
 

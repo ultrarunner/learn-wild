@@ -42,22 +42,16 @@ export class Dashboard implements AfterViewInit {
 
     constructor(public authService: AuthService, public endpointService: EndPointService) {
         authService.authenticated$.subscribe(authUser => {
-            if (authUser) {
-                authService.user$.subscribe(user => {
-                    if (user != null) {
-                        this.componentInfos = endpointService.getUserEndPoints(user.uid);
-                    }
-                    else {
-                        this.componentInfos = endpointService.endPoints.filter((item, index) => {
-                            return item.active === true;
-                        });
-                    }                    
-                });
-            } else {
-                this.componentInfos = endpointService.endPoints.filter((item, index) => {
-                    return item.active === true;
-                });
-            }
+            // if (authUser) {
+            authService.user$.subscribe(user => {
+                console.log("fetching user end points...");
+                this.componentInfos = endpointService.getUserEndPoints(user);
+            });
+            // } else {
+            //     this.componentInfos = endpointService.endPoints.filter((item, index) => {
+            //         return item.active === true;
+            //     });
+            // }
         });
     }
 

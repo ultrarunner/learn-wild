@@ -3,7 +3,6 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { DatePipe } from '@angular/common';
-import { RouterModule, Routes } from '@angular/router';
 import { MaterialModule } from './material.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
@@ -13,6 +12,7 @@ import { AngularFireAuthModule, AngularFireAuth } from 'angularfire2/auth';
 
 import { MasonryModule } from 'angular2-masonry';
 import { AppComponent } from './app.component';
+import { AppRoutingModule, routingComponents} from './app.routing';
 
 // dashboard
 import { Dashboard } from './dashboard/dashboard';
@@ -51,10 +51,6 @@ import { VgOverlayPlayModule } from 'videogular2/overlay-play';
 import { VgBufferingModule } from 'videogular2/buffering';
 import { SingleMediaPlayerComponent } from './shared/single-media-player/single-media-player.component';
 import { HotComponent } from './dashboard/cards/hot/hot.component';
-import { LoginComponent } from './login/login.component';
-import { ProtectedComponent } from './protected/protected.component';
-import { HomeComponent } from './home/home.component';
-import { SignInComponent } from './shared/sign-in/sign-in.component';
 import { environment } from '../environments/environment';
 
 export const firebaseConfig = {
@@ -66,37 +62,14 @@ export const firebaseConfig = {
   messagingSenderId: environment.firebaseConfig.messagingSenderId //"187124471014"
 };
 
-const routes: Routes = [
-  {
-    path: '',
-    redirectTo: '/home',
-    pathMatch: 'full'
-  },
-  {
-    path: 'home',
-    component: HomeComponent
-  },
-  {
-    path: 'test',
-    component: HomeComponent
-  },  
-  {
-    path: 'login',
-    component: LoginComponent
-  },
-  {
-    path: 'protected',
-    component: ProtectedComponent,
-    canActivate: [AuthGuardService]
-  }
-]
-
 @NgModule({
 
   declarations: [
     AppComponent,
-    LoginComponent,
-    ProtectedComponent,
+    routingComponents,
+    // LoginComponent,
+    // ProtectedComponent,
+    // HomeComponent,    
     Dashboard,
     DashboardComponentOutlet,
 
@@ -111,15 +84,13 @@ const routes: Routes = [
     SingleMediaPlayerComponent,
     ToolbarComponent,
     HotComponent,
-    HomeComponent,
-    QuoteComponent,
-    SignInComponent
+    QuoteComponent
   ],
 
   imports: [
     BrowserModule,
+    AppRoutingModule,
     FormsModule,
-    RouterModule.forRoot(routes, { useHash: true }),
     HttpModule,
     AngularFireModule.initializeApp(firebaseConfig),
     AngularFireAuthModule,
