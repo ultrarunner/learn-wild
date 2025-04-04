@@ -1,5 +1,3 @@
-import { DashboardComponent } from '../dashboard/dashboard-component';
-
 export interface EndPoint {
     end_point_id: number;
     type: any;
