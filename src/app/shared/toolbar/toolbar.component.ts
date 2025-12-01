@@ -8,7 +8,7 @@ import { FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2/d
 @Component({
     selector: 'toolbar',
     template: `
-        <md-toolbar style="background-color: black;">
+        <mat-toolbar style="background-color: black;">
         <span style="color: white;">
             <a href="\">
                 <img 
@@ -21,29 +21,29 @@ import { FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2/d
             Learn Wild <font color="red" > | </font> Never Stop Learning. Ever.           
         </span>
 
-        <button md-icon-button [mdMenuTriggerFor]="menu">
-            <md-icon style="color: white;" *ngIf="!(currentUser)">account_circle</md-icon>
-            <md-icon style="color: white;" *ngIf="(currentUser)">face</md-icon>
+        <button mat-icon-button [matMenuTriggerFor]="menu">
+            <mat-icon style="color: white;" *ngIf="!(currentUser)">account_circle</mat-icon>
+            <mat-icon style="color: white;" *ngIf="(currentUser)">face</mat-icon>
         </button>
         
-        <md-menu #menu="mdMenu">
-            <button md-menu-item (click)="googleLogin()" *ngIf="!(currentUser)">
-                <button md-raised-button color="warn">Google</button>
+        <mat-menu #menu="matMenu">
+            <button mat-menu-item (click)="googleLogin()" *ngIf="!(currentUser)">
+                <button mat-raised-button color="warn">Google</button>
             </button>
-            <button md-menu-item (click)="githubLogin()" *ngIf="!(currentUser)">
-                <button md-raised-button color="warn">GitHub</button>
+            <button mat-menu-item (click)="githubLogin()" *ngIf="!(currentUser)">
+                <button mat-raised-button color="warn">GitHub</button>
             </button>
-            <button md-menu-item (click)="twitterLogin()" *ngIf="!(currentUser)">
-                <button md-raised-button color="warn">Twitter</button>
+            <button mat-menu-item (click)="twitterLogin()" *ngIf="!(currentUser)">
+                <button mat-raised-button color="warn">Twitter</button>
             </button>                
-            <button md-menu-item (click)="logout()" *ngIf="(currentUser)" title="{{currentUser.uid}} | {{currentUser.email}}">
-                <button md-raised-button>Logout</button>
+            <button mat-menu-item (click)="logout()" *ngIf="(currentUser)" title="{{currentUser.uid}} | {{currentUser.email}}">
+                <button mat-raised-button>Logout</button>
             </button>
-        </md-menu>
-    </md-toolbar>
-    <md-toolbar style="background-color: black;">
+        </mat-menu>
+    </mat-toolbar>
+    <mat-toolbar style="background-color: black;">
         <span style="width: 100%"><app-single-media-player></app-single-media-player></span>        
-    </md-toolbar>
+    </mat-toolbar>
     `
 })
 

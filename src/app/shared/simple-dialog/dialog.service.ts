@@ -1,16 +1,16 @@
 import { Observable } from 'rxjs/Rx';
 import { SimpleDialogComponent } from './simple-dialog.component';
-import { MdDialogRef, MdDialog, MdDialogConfig } from '@angular/material';
+import { MatDialogRef, MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { Injectable } from '@angular/core';
 
 @Injectable()
 export class DialogService {
 
-    constructor(private dialog: MdDialog) { }
+    constructor(private dialog: MatDialog) { }
 
     public confirm(title: string, message: string): Observable<boolean> {
 
-        let dialogRef: MdDialogRef<SimpleDialogComponent>;
+        let dialogRef: MatDialogRef<SimpleDialogComponent>;
 
         dialogRef = this.dialog.open(SimpleDialogComponent);
         dialogRef.componentInstance.title = title;
