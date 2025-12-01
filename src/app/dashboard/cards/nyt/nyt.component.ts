@@ -12,33 +12,33 @@ import { EventService } from '../../../shared/events.service';
 @Component({
   selector: 'app-component-nyt',
   template: `
-      <md-card masonry-brick style="min-width: 280px; max-width: 412px; margin: 5px;" (click)="onSelected()">
-        <md-card-header *ngIf="results.length">
-          <md-card-title>{{title}} <font color='red'>|</font> {{ options.section | upperCaseFirstLetter }}</md-card-title>
-        </md-card-header>
-        <md-card-content *ngIf="!results.length">
-          <md-spinner style="margin-bottom: 10px;"></md-spinner>              
+      <mat-card style="min-width: 280px; max-width: 412px; margin: 5px;" (click)="onSelected()">
+        <mat-card-header *ngIf="results.length">
+          <mat-card-title>{{title}} <font color='red'>|</font> {{ options.section | upperCaseFirstLetter }}</mat-card-title>
+        </mat-card-header>
+        <mat-card-content *ngIf="!results.length">
+          <mat-spinner style="margin-bottom: 10px;"></mat-spinner>              
           Loading data from... {{end_point}}
-        </md-card-content>
-        <md-card-content *ngIf="results.length">
-          <md-list-item *ngFor="let item of results">
-            <div class="md-list-item-text" layout="column">         
-              <button md-icon-button (click)="openDialog(item)">
-                <md-icon [style.color]="item.today ? '#b62025' : 'white'">info</md-icon>
+        </mat-card-content>
+        <mat-card-content *ngIf="results.length">
+          <mat-list-item *ngFor="let item of results">
+            <div class="mat-list-item-text" layout="column">         
+              <button mat-icon-button (click)="openDialog(item)">
+                <mat-icon [style.color]="item.today ? '#b62025' : 'white'">info</mat-icon>
               </button>
-              <button md-icon-button (click)='onOpenLink(item)' mdTooltip="Open Article in New Window" mdTooltipPosition="above">
-                <md-icon>open_in_new</md-icon>
+              <button mat-icon-button (click)='onOpenLink(item)' matTooltip="Open Article in New Window" matTooltipPosition="above">
+                <mat-icon>open_in_new</mat-icon>
               </button>            
               {{item.title}}
             </div>             
-          </md-list-item>
-        </md-card-content>
-        <md-card-actions style="text-align: right;">
-          <button md-mini-fab (click)='onPullData()' mdTooltip="Refresh" mdTooltipPosition="above">
-            <md-icon>refresh</md-icon>
+          </mat-list-item>
+        </mat-card-content>
+        <mat-card-actions style="text-align: right;">
+          <button mat-mini-fab (click)='onPullData()' matTooltip="Refresh" matTooltipPosition="above">
+            <mat-icon>refresh</mat-icon>
           </button>
-        </md-card-actions>
-      </md-card>`,
+        </mat-card-actions>
+      </mat-card>`,
   providers: [TodayPipe]
 })
 

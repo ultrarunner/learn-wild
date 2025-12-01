@@ -6,14 +6,27 @@ import {
     Output,
     EventEmitter,
     OnChanges,
-    OnInit
+    OnInit,
+    ViewChild,
+    ElementRef
 } from '@angular/core';
 
 import { DashboardComponent } from './dashboard-component';
 
 @Component({
     selector: 'dashboard-component-outlet',
-    template: ''
+    template: '<div #itemContainer class="masonry-item"></div>',
+    styles: [`
+        :host {
+            display: block;
+            width: 422px;
+            margin: 5px;
+        }
+        .masonry-item {
+            width: 100%;
+            height: 100%;
+        }
+    `]
 })
 
 export class DashboardComponentOutlet implements DashboardComponent, OnChanges, OnInit {
@@ -26,10 +39,11 @@ export class DashboardComponentOutlet implements DashboardComponent, OnChanges, 
 
     @Output() componentSelected = new EventEmitter();
 
+    @ViewChild('itemContainer', { read: ViewContainerRef }) viewContainer: ViewContainerRef;
+
     private dynamicInstance: DashboardComponent;
 
-    constructor(private viewContainer: ViewContainerRef,
-        private componentFactoryResolver: ComponentFactoryResolver) {
+    constructor(private componentFactoryResolver: ComponentFactoryResolver) {
     }
 
     ngOnInit() {

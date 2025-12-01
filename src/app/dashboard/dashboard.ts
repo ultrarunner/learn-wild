@@ -10,16 +10,18 @@ import { AuthService } from '../shared/auth.service';
 @Component({
     selector: 'dashboard',
     template: `
-        <masonry style="margin: 0 auto;">
-            <dashboard-component-outlet *ngFor="let info of componentInfos"
-                [type]="info.type" 
-                [title]="info.title" 
-                [end_point]="info.end_point"
-                [count]="info.count"
-                [options]="info.options"
-                (componentSelected)="selectComponent($event)">
-            </dashboard-component-outlet>
-        </masonry>
+        <div style="width: 100%; position: relative;">
+            <masonry [options]="options" (layoutComplete)="onLayoutComplete()">
+                <dashboard-component-outlet masonry-brick *ngFor="let info of componentInfos"
+                    [type]="info.type" 
+                    [title]="info.title" 
+                    [end_point]="info.end_point"
+                    [count]="info.count"
+                    [options]="info.options"
+                    (componentSelected)="selectComponent($event)">
+                </dashboard-component-outlet>
+            </masonry>
+        </div>
     `
 })
 // <div *ngIf="selectedComponent" class="col-sm-12">
@@ -34,10 +36,8 @@ export class Dashboard implements AfterViewInit {
     userEndPoints: UserEndPoint[] = [];
 
     options: MasonryOptions = {
-        transitionDuration: '0.35',
-        fitWidth: true,
-        gutter: 5,
-        percentPosition: true
+        transitionDuration: '0.35s',
+        gutter: 10
     };
 
     constructor(public authService: AuthService, public endpointService: EndPointService) {
@@ -62,9 +62,16 @@ export class Dashboard implements AfterViewInit {
     }
 
     ngAfterViewInit() {
-        this.masonry.layoutComplete.subscribe(() => {
-            //console.log('masonry layout complete.');
-        });
+        if (this.masonry) {
+            this.masonry.layoutComplete.subscribe(() => {
+                //console.log('masonry layout complete.');
+            });
+        }
+    }
+
+    onLayoutComplete() {
+        // Masonry layout is complete
+        //console.log('masonry layout complete.');
     }
 
     selectComponent(selected: any) {
